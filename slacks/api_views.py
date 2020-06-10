@@ -31,7 +31,6 @@ def question(request):
         requests.post(
             url=request.data['response_url'],
             json={
-                'text': 'this is working',
                 "blocks": [
                     {
                         "type": "section",

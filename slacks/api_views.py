@@ -1,4 +1,5 @@
 import os
+import json
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -28,7 +29,7 @@ def question(request):
 
     data = requests.post(
         url=request.data['response_url'],
-        data={
+        json={
             'text': 'this is working',
         }
     )

@@ -1,10 +1,16 @@
+import os
+
 from django.views.decorators.csrf import csrf_exempt
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
-import requests
+from slack import WebClient
+
+SLACK_BOT_TOKEN = os.environ["SLACK_BOT_TOKEN"]
+slack_client = WebClient(SLACK_BOT_TOKEN)
+
 
 @csrf_exempt
 @api_view(['POST', ])
@@ -22,14 +28,13 @@ def question(request):
     print(request.data['team_id'])
     print(request.data['response_url'])
 
-    channel_id = request.data['channel_id']
-
-    message_data = {
-        'channel': channel_id,
-        'text': 'testing to see if slash command works',
-    }
-
-    data = requests.post(url=request.data['response_url'], data=message_data)
+    data = slack_client.api_call(
+      "chat.update",
+      channel=request.data['channel_id'],
+      ts=request.data["trigger_id"],
+      text='testing to see if slash command works',
+      attachments=[]
+    )
 
     print(data)
 

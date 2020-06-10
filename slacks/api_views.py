@@ -26,10 +26,7 @@ def interactive_commands(request):
 @api_view(['POST', ])
 def question(request):
 
-    print(request.data['team_id'])
-    print(request.data['response_url'])
-
-    data = request.post(
+    data = requests.post(
         url=request.data['response_url'],
         data={
             'text': 'this is working',

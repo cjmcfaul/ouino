@@ -27,6 +27,17 @@ if not HEROKU:
     environ.Env.read_env(env_file)
     DEBUG = True
 else:
+    import sentry_sdk
+    from sentry_sdk.integrations.django import DjangoIntegration
+
+    sentry_sdk.init(
+        dsn="https://883f7469fc9d4582bd20614fc0656cc2@o405813.ingest.sentry.io/5272097",
+        integrations=[DjangoIntegration()],
+
+        # If you wish to associate users to errors (assuming you are using
+        # django.contrib.auth) you may enable sending PII data.
+        send_default_pii=True
+    )
     DEBUG = False
 
 SECRET_KEY = os.environ.get('SECRET_KEY', default='foo')

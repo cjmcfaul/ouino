@@ -17,7 +17,8 @@ slack_client = WebClient(SLACK_BOT_TOKEN)
 @csrf_exempt
 @api_view(['POST', 'GET'])
 def interactive_commands(request):
-    print(request.data)
+    print(request.GET)
+    print(request.body)
     return Response(status=status.HTTP_200_OK)
 
 '''

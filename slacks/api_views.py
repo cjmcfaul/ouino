@@ -33,6 +33,6 @@ def question(request):
         }
     )
 
-    print(data.request.body)
+    print(data.text)
 
     return Response(status=status.HTTP_200_OK)

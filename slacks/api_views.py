@@ -29,10 +29,18 @@ def interactive_commands(request):
 def question(request):
 
     if request.data['command'] == '/question':
+        user_question = "*Question:* %s" % request.data['text']
         requests.post(
             url=request.data['response_url'],
             json={
                 "blocks": [
+                    {
+                        "type": "section",
+                        "text": {
+                            "type": "mrkdwn",
+                            "text": user_question
+                        }
+                    },
                     {
                         "type": "section",
                         "text": {

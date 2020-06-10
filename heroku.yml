@@ -1,0 +1,10 @@
+build:
+  docker:
+    web: Dockerfile
+run:
+  web: daphne yes_no.asgi:application --port $PORT --bind 0.0.0.0 -v2
+release:
+  image: web
+  command:
+    - python manage.py migrate
+    - python manage.py collectstatic --noinput

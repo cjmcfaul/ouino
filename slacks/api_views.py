@@ -36,6 +36,6 @@ def question(request):
       attachments=[]
     )
 
-    print(data)
+    print(data.data)
 
     return Response(status=status.HTTP_200_OK)

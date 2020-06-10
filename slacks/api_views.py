@@ -27,13 +27,53 @@ def interactive_commands(request):
 @api_view(['POST', ])
 def question(request):
 
-    data = requests.post(
-        url=request.data['response_url'],
-        json={
-            'text': 'this is working',
-        }
-    )
-
-    print(data.text)
+    if request.data['command'] == '/question':
+        requests.post(
+            url=request.data['response_url'],
+            json={
+                'text': 'this is working',
+                "blocks": [
+                    {
+                        "type": "section",
+                        "text": {
+                            "type": "mrkdwn",
+                            "text": "When do you need a response?"
+                        },
+                        "accessory": {
+                            "type": "static_select",
+                            "placeholder": {
+                                "type": "plain_text",
+                                "text": "Select an item",
+                            },
+                            "options": [
+                                {
+                                    "text": {
+                                        "type": "plain_text",
+                                        "text": "Urgent: in the next 3 hours",
+                                    },
+                                    "value": "U"
+                                },
+                                {
+                                    "text": {
+                                        "type": "plain_text",
+                                        "text": "Normal: in the next 24 hours",
+                                    },
+                                    "value": "N"
+                                },
+                                {
+                                    "text": {
+                                        "type": "plain_text",
+                                        "text": "Whenever: in the next 72 hours",
+                                    },
+                                    "value": "W"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        )
+    else:
+        print(request.data)
 
     return Response(status=status.HTTP_200_OK)

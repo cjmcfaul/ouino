@@ -19,6 +19,8 @@ slack_client = WebClient(SLACK_BOT_TOKEN)
 def interactive_commands(request):
     print(request.GET)
     print(request.body)
+    print(request.POST)
+    print(request)
     return Response(status=status.HTTP_200_OK)
 
 '''

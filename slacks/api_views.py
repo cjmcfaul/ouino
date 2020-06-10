@@ -31,7 +31,7 @@ def question(request):
     data = slack_client.api_call(
       "chat.update",
       channel=request.data['channel_id'],
-      ts=request.data["trigger_id"],
+      ts=request.data["token"],
       text='testing to see if slash command works',
       attachments=[]
     )

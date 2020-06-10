@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from slack import WebClient
+import requests
 
 SLACK_BOT_TOKEN = os.environ["SLACK_BOT_TOKEN"]
 slack_client = WebClient(SLACK_BOT_TOKEN)
@@ -28,12 +29,11 @@ def question(request):
     print(request.data['team_id'])
     print(request.data['response_url'])
 
-    data = slack_client.api_call(
-      "chat.update",
-      channel=request.data['channel_id'],
-      ts=request.data["token"],
-      text='testing to see if slash command works',
-      attachments=[]
+    data = request.post(
+        url=request.data['response_url'],
+        data={
+            'text': 'this is working',
+        }
     )
 
     print(data.data)

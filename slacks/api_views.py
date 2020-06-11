@@ -25,8 +25,9 @@ slack_client = WebClient(SLACK_BOT_TOKEN)
 def interactive_commands(request):
 
     data = request.data['payload']
-    print(data)
-    action_id = request.data['payload']['actions'][0]['action_id']
+    actions = data['actions']
+    print(actions)
+    action_id = actions[0]['action_id']
     channel_id = data['channel']['id']
     question_text = ''
     if action_id == "urgency_select":
@@ -45,9 +46,12 @@ def interactive_commands(request):
 
     return Response(status=status.HTTP_200_OK)
 
+
 '''
 <QueryDict: {'token': ['a5b0ETDdz83wnLwxqYqUqvoH'], 'team_id': ['T0153DP2UNR'], 'team_domain': ['yesnoworkspace'], 'channel_id': ['C014Q2ZS695'], 'channel_name': ['project'], 'user_id': ['U015B0PL1BN'], 'user_name': ['colinjmcfaul'], 'command': ['/question'], 'text': ['Is this working? urgent'], 'response_url': ['https://hooks.slack.com/commands/T0153DP2UNR/1162352845527/fUKP2289tYXkM8Wd7XiMtzUI'], 'trigger_id': ['1200931719072.1173465096773.7593f9f11efcdb628b3d42e70fe88aa4']}>
 '''
+
+
 @csrf_exempt
 @api_view(['POST', ])
 def question(request):

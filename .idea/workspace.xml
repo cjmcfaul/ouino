@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ed091cee-21c9-4f48-9338-acd1ce606530" name="Default Changelist" comment="" />
+    <list default="true" id="ed091cee-21c9-4f48-9338-acd1ce606530" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/slacks/api_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/slacks/api_views.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,8 +111,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/slacks/api_views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="347">
-                  <caret line="32" column="81" selection-start-line="32" selection-start-column="81" selection-end-line="32" selection-end-column="81" />
+                <state relative-caret-position="390">
+                  <caret line="26" column="34" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
                   </folding>
@@ -426,8 +428,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/slacks/api_views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="32" column="81" selection-start-line="32" selection-start-column="81" selection-end-line="32" selection-end-column="81" />
+        <state relative-caret-position="390">
+          <caret line="26" column="34" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>

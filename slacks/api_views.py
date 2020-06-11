@@ -25,13 +25,15 @@ slack_client = WebClient(SLACK_BOT_TOKEN)
 def interactive_commands(request):
 
     data = request.data['payload']
-    action_id = data['actions'][0]['action_id']
+    print(data)
+    action_id = request.data['payload']['actions'][0]['action_id']
     channel_id = data['channel']['id']
     question_text = ''
     if action_id == "urgency_select":
+        urgency = request.data['payload']['actions'][0]['selected_option']['value']
         slack_client.chat_postMessage(
             channel=channel_id,
-            blocks=blocks.question_block(question_text)
+            blocks=blocks.question_block(question_text, urgency)
         )
     if action_id == 'cancel_question':
         requests.post(

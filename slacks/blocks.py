@@ -1,5 +1,54 @@
-def question_block(question_text):
-    block = []
+def question_block(question_text, urgency):
+
+    status = {
+        'U': ":rotating_light: *Urgent:* respond in the next 3 hours",
+        'N': ":timer_clock: *Normal:* respond in the next 24 hours",
+        'W': ":snail: *Whenever:* respond in the next 72 hours"
+    }
+
+    block = [
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": question_text
+            }
+        },
+        {
+            "type": "actions",
+            "elements": [
+                {
+                    "type": "button",
+                    "text": {
+                        "type": "plain_text",
+                        "text": "Yes"
+                    },
+                    "style": "primary",
+                    "value": "yes",
+                    "action_id": "question_response"
+                },
+                {
+                    "type": "button",
+                    "text": {
+                        "type": "plain_text",
+                        "text": "No"
+                    },
+                    "style": "danger",
+                    "value": "no",
+                    "action_id": "question_response"
+                }
+            ]
+        },
+        {
+            "type": "context",
+            "elements": [
+                {
+                    "type": "mrkdwn",
+                    "text": status[urgency]
+                }
+            ]
+        }
+    ]
     return block
 
 

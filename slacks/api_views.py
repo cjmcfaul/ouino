@@ -23,18 +23,21 @@ slack_client = WebClient(SLACK_BOT_TOKEN)
 @csrf_exempt
 @api_view(['POST', 'GET'])
 def interactive_commands(request):
-
-    data = request.data
     try:
-        print('dict')
-        print(data.dict())
+        data = json.loads(request.data['payload'])
+        print('first')
     except:
-        print('json')
-        print(json.loads(data))
-    data = data['payload']
+        data = request.data.dict()
+        data = json.loads(data['payload'])
+        print('second')
     actions = data['actions']
     print(actions)
-    action_id = actions[0]['action_id']
+    try:
+        action_id = actions[0]['action_id']
+        print('2 one')
+    except:
+        action_id = actions['action_id']
+        print('2 two')
     channel_id = data['channel']['id']
     question_text = ''
     if action_id == "urgency_select":

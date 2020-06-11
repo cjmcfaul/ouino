@@ -24,8 +24,8 @@ slack_client = WebClient(SLACK_BOT_TOKEN)
 @api_view(['POST', 'GET'])
 def interactive_commands(request):
 
-    data = request.data['payload'][0]
-    action_id = data['actions']['action_id']
+    data = request.data['payload']
+    action_id = data['actions'][0]['action_id']
     channel_id = data['channel']['id']
     question_text = ''
     if action_id == "urgency_select":

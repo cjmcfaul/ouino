@@ -26,9 +26,12 @@ def interactive_commands(request):
 
     data = request.data
     try:
+        print('dict')
         print(data.dict())
     except:
+        print('json')
         print(json.loads(data))
+    data = data['payload']
     actions = data['actions']
     print(actions)
     action_id = actions[0]['action_id']

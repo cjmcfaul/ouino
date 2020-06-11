@@ -32,52 +32,56 @@ def question(request):
         requests.post(
             url=request.data['response_url'],
             json={
-                "text": "When do you need a response?",
-                "response_type": "in_channel",
-                "attachments": [
+                "blocks": [
                     {
                         "type": "section",
                         "text": {
                             "type": "mrkdwn",
                             "text": user_question
                         }
-                    },
+                    }
+                ],
+                "attachments": [
                     {
-                        "type": "section",
-                        "text": {
-                            "type": "mrkdwn",
-                            "text": "When do you need a response?"
-                        },
-                        "accessory": {
-                            "type": "static_select",
-                            "placeholder": {
-                                "type": "plain_text",
-                                "text": "Select an item",
-                            },
-                            "options": [
-                                {
-                                    "text": {
-                                        "type": "plain_text",
-                                        "text": "Urgent: in the next 3 hours",
-                                    },
-                                    "value": "U"
+                        "blocks": [
+                            {
+                                "type": "section",
+                                "text": {
+                                    "type": "mrkdwn",
+                                    "text": "When do you need a response?"
                                 },
-                                {
-                                    "text": {
+                                "accessory": {
+                                    "type": "static_select",
+                                    "placeholder": {
                                         "type": "plain_text",
-                                        "text": "Normal: in the next 24 hours",
+                                        "text": "Select an item"
                                     },
-                                    "value": "N"
-                                },
-                                {
-                                    "text": {
-                                        "type": "plain_text",
-                                        "text": "Whenever: in the next 72 hours",
-                                    },
-                                    "value": "W"
+                                    "options": [
+                                        {
+                                            "text": {
+                                                "type": "plain_text",
+                                                "text": "Urgent: in the next 3 hours"
+                                            },
+                                            "value": "U"
+                                        },
+                                        {
+                                            "text": {
+                                                "type": "plain_text",
+                                                "text": "Normal: in the next 24 hours"
+                                            },
+                                            "value": "N"
+                                        },
+                                        {
+                                            "text": {
+                                                "type": "plain_text",
+                                                "text": "Whenever: in the next 72 hours"
+                                            },
+                                            "value": "W"
+                                        }
+                                    ]
                                 }
-                            ]
-                        }
+                            }
+                        ]
                     }
                 ]
             }

@@ -7,6 +7,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
+from slacks import blocks
+
 from slack import WebClient
 import requests
 
@@ -22,11 +24,15 @@ slack_client = WebClient(SLACK_BOT_TOKEN)
 @api_view(['POST', 'GET'])
 def interactive_commands(request):
 
-    data = request.data['payload']
+    data = request.data['payload'][0]
     action_id = data['actions']['action_id']
     channel_id = data['channel']['id']
+    question_text = ''
     if action_id == "urgency_select":
-        print('yes')
+        slack_client.chat_postMessage(
+            channel=channel_id,
+            blocks=blocks.question_block(question_text)
+        )
     if action_id == 'cancel_question':
         requests.post(
             url=request.data['response_url'],
@@ -51,61 +57,8 @@ def question(request):
         requests.post(
             url=request.data['response_url'],
             json={
-                "blocks": [
-                    {
-                        "type": "section",
-                        "text": {
-                            "type": "mrkdwn",
-                            "text": user_question
-                        }
-                    },
-                    {
-                        "type": "actions",
-                        "elements": [
-                            {
-                                "type": "static_select",
-                                "action_id": "urgency_select",
-                                "placeholder": {
-                                    "type": "plain_text",
-                                    "text": "Urgency",
-                                },
-                                "options": [
-                                    {
-                                        "text": {
-                                            "type": "plain_text",
-                                            "text": "Urgent: in the next three hours"
-                                        },
-                                        "value": "U"
-                                    },
-                                    {
-                                        "text": {
-                                            "type": "plain_text",
-                                            "text": "Normal: in the next 24 hours"
-                                        },
-                                        "value": "N"
-                                    },
-                                    {
-                                        "text": {
-                                            "type": "plain_text",
-                                            "text": "Whenever: in the next 72 hours"
-                                        },
-                                        "value": "W"
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "button",
-                                "text": {
-                                    "type": "plain_text",
-                                    "text": "Cancel"
-                                },
-                                "style": "danger",
-                                "value": "cancel",
-                                "action_id": "cancel_question"
-                            }
-                        ]
-                    }
-                ]
+                "text": user_question,
+                "blocks": blocks.confirm_question_create_block(user_question)
             }
         )
     else:

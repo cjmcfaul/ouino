@@ -23,8 +23,17 @@ slack_client = WebClient(SLACK_BOT_TOKEN)
 def interactive_commands(request):
 
     data = request.data['payload']
-
-    print(data)
+    action_id = data['actions']['action_id']
+    channel_id = data['channel']['id']
+    if action_id == "urgency_select":
+        print('yes')
+    if action_id == 'cancel_question':
+        requests.post(
+            url=request.data['response_url'],
+            json={
+                "delete_original": "true",
+            }
+        )
 
     return Response(status=status.HTTP_200_OK)
 
@@ -34,6 +43,8 @@ def interactive_commands(request):
 @csrf_exempt
 @api_view(['POST', ])
 def question(request):
+
+    print(request.data)
 
     if request.data['command'] == '/question':
         user_question = "*Question:* %s" % request.data['text']

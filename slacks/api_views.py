@@ -54,6 +54,7 @@ def question(request):
                                 },
                                 "accessory": {
                                     "type": "static_select",
+                                    "action_id": "urgency_select",
                                     "placeholder": {
                                         "type": "plain_text",
                                         "text": "Select an item"

@@ -24,7 +24,7 @@ slack_client = WebClient(SLACK_BOT_TOKEN)
 @api_view(['POST', 'GET'])
 def interactive_commands(request):
 
-    data = json.loads(request.data)
+    data = dict(request.data.iterlists())
     print(data)
     actions = data['actions']
     print(actions)

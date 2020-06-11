@@ -41,48 +41,50 @@ def question(request):
                             "type": "mrkdwn",
                             "text": user_question
                         }
-                    }
-                ],
-                "attachments": [
+                    },
                     {
-                        "blocks": [
+                        "type": "actions",
+                        "elements": [
                             {
-                                "type": "section",
-                                "text": {
-                                    "type": "mrkdwn",
-                                    "text": "When do you need a response?"
+                                "type": "static_select",
+                                "action_id": "urgency_select",
+                                "placeholder": {
+                                    "type": "plain_text",
+                                    "text": "Urgency",
                                 },
-                                "accessory": {
-                                    "type": "static_select",
-                                    "action_id": "urgency_select",
-                                    "placeholder": {
-                                        "type": "plain_text",
-                                        "text": "Select an item"
+                                "options": [
+                                    {
+                                        "text": {
+                                            "type": "plain_text",
+                                            "text": "Urgent: in the next three hours"
+                                        },
+                                        "value": "U"
                                     },
-                                    "options": [
-                                        {
-                                            "text": {
-                                                "type": "plain_text",
-                                                "text": "Urgent: in the next 3 hours"
-                                            },
-                                            "value": "U"
+                                    {
+                                        "text": {
+                                            "type": "plain_text",
+                                            "text": "Normal: in the next 24 hours"
                                         },
-                                        {
-                                            "text": {
-                                                "type": "plain_text",
-                                                "text": "Normal: in the next 24 hours"
-                                            },
-                                            "value": "N"
+                                        "value": "N"
+                                    },
+                                    {
+                                        "text": {
+                                            "type": "plain_text",
+                                            "text": "Whenever: in the next 72 hours"
                                         },
-                                        {
-                                            "text": {
-                                                "type": "plain_text",
-                                                "text": "Whenever: in the next 72 hours"
-                                            },
-                                            "value": "W"
-                                        }
-                                    ]
-                                }
+                                        "value": "W"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "button",
+                                "text": {
+                                    "type": "plain_text",
+                                    "text": "Cancel"
+                                },
+                                "style": "danger",
+                                "value": "cancel",
+                                "action_id": "cancel_question"
                             }
                         ]
                     }

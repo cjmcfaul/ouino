@@ -39,15 +39,19 @@ def interactive_commands(request):
         question.responses = create_channel_members_dict(question.channel_id, question.created_by)
         question.save()
         block = blocks.question_block(question.question_text, value_list[1], question.public_id)
-        response = requests.post(
-            url=data['response_url'],
-            json={
+        response_data = {
                 "channel": channel_id,
                 "blocks": block,
                 "response_type": "in_channel",
                 "replace_original": "true",
-            })
-        print(response)
+            }
+        try:
+            response = requests.post(
+                url=data['response_url'],
+                json=response_data
+            )
+        except Exception as e:
+            print(e)
     elif action_id == 'cancel_question':
         requests.post(
             url=data['response_url'],
@@ -75,7 +79,7 @@ def interactive_commands(request):
     elif action_id == 'new_yes_no_question':
         pass
 
-    return Response(status=status.HTTP_200_OK)
+    return Response(response_data, status=status.HTTP_200_OK)
 
 
 '''

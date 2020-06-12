@@ -54,6 +54,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'questions.apps.QuestionsConfig',
     'slacks.apps.SlacksConfig',
     'users.apps.UsersConfig',
     'django.contrib.admin',

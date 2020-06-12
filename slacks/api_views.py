@@ -30,7 +30,8 @@ def interactive_commands(request):
     action_id = actions['action_id']
     channel_id = data['channel']['id']
     if action_id == "urgency_select":
-        block = blocks.question_block('Placeholder', actions['selected_option']['value'])
+        question_text = data['message']['blocks'][0]['text']['text']
+        block = blocks.question_block(question_text, actions['selected_option']['value'])
         slack_client.chat_postMessage(
             channel=channel_id,
             blocks=block
@@ -55,8 +56,8 @@ def interactive_commands(request):
 @api_view(['POST', ])
 def question(request):
     if request.data['command'] == '/question':
-        user_question = "*Question:* %s" % request.data['text']
-        response = slack_client.chat_postMessage(
+        user_question = "*%s*" % request.data['text']
+        slack_client.chat_postMessage(
             channel=request.data['channel_id'],
             blocks=blocks.confirm_question_create_block(user_question)
         )

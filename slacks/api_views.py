@@ -38,42 +38,33 @@ def interactive_commands(request):
             channel_id=channel_id
         )
         block = blocks.question_block(question_text, actions['selected_option']['value'], question.public_id)
-        response = slack_client.chat_postMessage(
-            channel=channel_id,
-            blocks=block,
-            reply_broadcast=True
-        )
-        print(response.data)
-        requests.post(
-            url=data['response_url'],
-            json={
+        data = {
+                "channel": channel_id,
+                "blocks": block,
+                "reply_broadcast": True
+            }
+    elif action_id == 'cancel_question':
+        data={
                 "delete_original": "true",
             }
-        )
-    if action_id == 'cancel_question':
-        requests.post(
-            url=data['response_url'],
-            json={
-                "delete_original": "true",
-            }
-        )
-    if action_id == 'question_response_yes':
+    elif action_id == 'question_response_yes':
         question = Question.objects.get(public_id=actions['value'])
-        response = slack_client.chat_postMessage(
-            channel=question.created_by,
-            blocks=blocks.question_response('yes', question.question_text, data['user']['id']),
-            reply_broadcast=True
-        )
-    if action_id == 'question_response_no':
-        response = slack_client.chat_postMessage(
-            channel=question.created_by,
-            blocks=blocks.question_response('no', question.question_text, data['user']['id']),
-            reply_broadcast=True
-        )
-    if action_id == 'new_yes_no_question':
+        data = {
+            "channel": question.created_by,
+            "blocks": blocks.question_response('yes', question.question_text, data['user']['username']),
+            "reply_broadcast": True
+        }
+    elif action_id == 'question_response_no':
+        question = Question.objects.get(public_id=actions['value'])
+        data = {
+            "channel": question.created_by,
+            "blocks": blocks.question_response('no', question.question_text, data['user']['username']),
+            "reply_broadcast": True
+        }
+    elif action_id == 'new_yes_no_question':
         pass
 
-    return Response(status=status.HTTP_200_OK)
+    return Response(data, status=status.HTTP_200_OK)
 
 
 '''
@@ -88,19 +79,13 @@ def question(request):
     if request.data['command'] == '/question':
         user_question = "*%s*" % request.data['text']
         channel_id = request.data['channel_id']
-        if request.data['channel_name'] == 'directmessage':
-            slack_client.chat_postMessage(
-                channel=channel_id,
-                blocks=blocks.confirm_question_create_block(user_question),
-                as_user=True
-            )
-        else:
-            slack_client.chat_postMessage(
-                channel=channel_id,
-                blocks=blocks.confirm_question_create_block(user_question)
-            )
+        data = {
+            "channel": channel_id,
+            "blocks": blocks.confirm_question_create_block(user_question)
+        }
 
     else:
         print(request.data)
+        data = {}
 
-    return Response(status=status.HTTP_200_OK)
+    return Response(data, status=status.HTTP_200_OK)

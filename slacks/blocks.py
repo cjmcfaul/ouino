@@ -103,21 +103,21 @@ def confirm_question_create_block(question_text, question_public_id):
                                 "type": "plain_text",
                                 "text": "Urgent: in the next three hours"
                             },
-                            "value": "%s, 'U'" % question_public_id
+                            "value": "%s, U" % question_public_id
                         },
                         {
                             "text": {
                                 "type": "plain_text",
                                 "text": "Normal: in the next 24 hours"
                             },
-                            "value": "%s, 'N'" % question_public_id
+                            "value": "%s, N" % question_public_id
                         },
                         {
                             "text": {
                                 "type": "plain_text",
                                 "text": "Whenever: in the next 72 hours"
                             },
-                            "value": "'%s', 'W'" % question_public_id
+                            "value": "%s, W" % question_public_id
                         }
                     ]
                 },

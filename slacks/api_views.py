@@ -26,22 +26,22 @@ slack_client = WebClient(SLACK_BOT_TOKEN)
 def interactive_commands(request):
 
     data = json.loads(request.data['payload'])
-    print(data)
     actions = data['actions'][0]
     action_id = actions['action_id']
     channel_id = data['channel']['id']
     if action_id == "urgency_select":
         value_list = actions['selected_option']['value'].split(",")
-        print(value_list)
         question = Question.objects.get(public_id=value_list[0])
         question.status = value_list[1]
         question.save()
         block = blocks.question_block(question.question_text, value_list[1], question.public_id)
-        data = {
+        requests.post(
+            url=data['response_url'],
+            json={
                 "channel": channel_id,
                 "blocks": block,
                 "reply_broadcast": True
-            }
+            })
     elif action_id == 'cancel_question':
         requests.post(
             url=data['response_url'],

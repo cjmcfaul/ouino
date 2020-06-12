@@ -25,6 +25,7 @@ slack_client = WebClient(SLACK_BOT_TOKEN)
 def interactive_commands(request):
 
     data = json.loads(request.data['payload'])
+    print(data)
     actions = data['actions'][0]
     action_id = actions['action_id']
     channel_id = data['channel']['id']
@@ -58,7 +59,7 @@ def question(request):
 
     if request.data['command'] == '/question':
         user_question = "*Question:* %s" % request.data['text']
-        response = requests.post(
+        requests.post(
             url=request.data['response_url'],
             json={
                 "text": user_question,

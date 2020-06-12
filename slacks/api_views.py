@@ -36,7 +36,8 @@ def interactive_commands(request):
         value_list = actions['selected_option']['value'].split(",")
         question = Question.objects.get(public_id=value_list[0])
         question.status = value_list[1]
-        question.responses = create_channel_members_dict(question.channel_id, question.created_by)
+        if question.channel_id[0] != 'D':
+            question.responses = create_channel_members_dict(question.channel_id, question.created_by)
         question.save()
         block = blocks.question_block(question.question_text, value_list[1], question.public_id)
         response_data = {
@@ -45,13 +46,11 @@ def interactive_commands(request):
                 "response_type": "in_channel",
                 "replace_original": "true",
             }
-        try:
-            response = requests.post(
-                url=data['response_url'],
-                json=response_data
-            )
-        except:
-            print("error with urgency select post")
+
+        requests.post(
+            url=data['response_url'],
+            json=response_data
+        )
     elif action_id == 'cancel_question':
         requests.post(
             url=data['response_url'],

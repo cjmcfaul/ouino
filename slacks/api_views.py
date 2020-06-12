@@ -25,13 +25,11 @@ slack_client = WebClient(SLACK_BOT_TOKEN)
 def interactive_commands(request):
 
     data = json.loads(request.data['payload'])
-    print(data)
     actions = data['actions'][0]
     action_id = actions['action_id']
     channel_id = data['channel']['id']
     if action_id == "urgency_select":
         block = blocks.question_block('Placeholder', actions['selected_option']['value'])
-        print(block)
         slack_client.chat_postMessage(
             channel=channel_id,
             blocks=block
@@ -56,6 +54,8 @@ def interactive_commands(request):
 @api_view(['POST', ])
 def question(request):
 
+    print(request.data)
+
     if request.data['command'] == '/question':
         user_question = "*Question:* %s" % request.data['text']
         response = requests.post(
@@ -65,7 +65,6 @@ def question(request):
                 "blocks": blocks.confirm_question_create_block(user_question)
             }
         )
-        print(response)
     else:
         print(request.data)
 

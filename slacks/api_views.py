@@ -27,7 +27,7 @@ slack_client = WebClient(SLACK_BOT_TOKEN)
 @csrf_exempt
 @api_view(['POST', 'GET'])
 def interactive_commands(request):
-
+    response_data = {}
     data = json.loads(request.data['payload'])
     actions = data['actions'][0]
     action_id = actions['action_id']
@@ -50,8 +50,8 @@ def interactive_commands(request):
                 url=data['response_url'],
                 json=response_data
             )
-        except Exception as e:
-            print(e)
+        except:
+            print("error with urgency select post")
     elif action_id == 'cancel_question':
         requests.post(
             url=data['response_url'],

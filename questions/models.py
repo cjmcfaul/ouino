@@ -34,4 +34,6 @@ class Question(models.Model):
     )
     message_ts = models.CharField(
         max_length=100,
+        blank=True,
+        null=True
     )

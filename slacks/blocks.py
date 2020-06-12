@@ -25,7 +25,7 @@ def question_block(question_text, urgency):
                     },
                     "style": "primary",
                     "value": "yes",
-                    "action_id": "question_response"
+                    "action_id": "question_response_yes"
                 },
                 {
                     "type": "button",
@@ -35,7 +35,7 @@ def question_block(question_text, urgency):
                     },
                     "style": "danger",
                     "value": "no",
-                    "action_id": "question_response"
+                    "action_id": "question_response_no"
                 }
             ]
         },

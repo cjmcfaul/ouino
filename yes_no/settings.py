@@ -170,6 +170,8 @@ AUTH_USER_MODEL = 'users.CustomUser'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 if HEROKU:
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True

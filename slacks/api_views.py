@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from slacks import blocks
-from questions import Question
+from questions.models import Question
 
 from slack import WebClient
 import requests

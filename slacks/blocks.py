@@ -78,7 +78,7 @@ def question_response(answer, question_text, username):
     return block
 
 
-def confirm_question_create_block(question_text):
+def confirm_question_create_block(question_text, question_public_id):
     block = [
         {
             "type": "section",
@@ -103,21 +103,21 @@ def confirm_question_create_block(question_text):
                                 "type": "plain_text",
                                 "text": "Urgent: in the next three hours"
                             },
-                            "value": "U"
+                            "value": "['%s', 'U']" % question_public_id
                         },
                         {
                             "text": {
                                 "type": "plain_text",
                                 "text": "Normal: in the next 24 hours"
                             },
-                            "value": "N"
+                            "value": "['%s', 'N']" % question_public_id
                         },
                         {
                             "text": {
                                 "type": "plain_text",
                                 "text": "Whenever: in the next 72 hours"
                             },
-                            "value": "W"
+                            "value": "['%s', 'W']" % question_public_id
                         }
                     ]
                 },

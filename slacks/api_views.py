@@ -31,13 +31,12 @@ def interactive_commands(request):
     action_id = actions['action_id']
     channel_id = data['channel']['id']
     if action_id == "urgency_select":
-        question_text = data['message']['blocks'][0]['text']['text']
-        question = Question.objects.create(
-            created_by=data['user']['id'],
-            question_text=question_text,
-            channel_id=channel_id
-        )
-        block = blocks.question_block(question_text, actions['selected_option']['value'], question.public_id)
+        value_list = list(actions['selected_option']['value'])
+        print(value_list)
+        question = Question.objects.get(public_id=value_list[0])
+        question.status = value_list[1]
+        question.save()
+        block = blocks.question_block(question.question_text, value_list[1], question.public_id)
         data = {
                 "channel": channel_id,
                 "blocks": block,
@@ -79,9 +78,14 @@ def question(request):
     if request.data['command'] == '/question':
         user_question = "*%s*" % request.data['text']
         channel_id = request.data['channel_id']
+        question = Question.objects.create(
+            created_by=request.data['user_id'],
+            question_text=user_question,
+            channel_id=channel_id
+        )
         data = {
             "channel": channel_id,
-            "blocks": blocks.confirm_question_create_block(user_question)
+            "blocks": blocks.confirm_question_create_block(user_question, question.public_id)
         }
 
     else:

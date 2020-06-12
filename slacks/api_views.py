@@ -54,18 +54,13 @@ def interactive_commands(request):
 @csrf_exempt
 @api_view(['POST', ])
 def question(request):
-
-    print(request.data)
-
     if request.data['command'] == '/question':
         user_question = "*Question:* %s" % request.data['text']
-        requests.post(
-            url=request.data['response_url'],
-            json={
-                "text": user_question,
-                "blocks": blocks.confirm_question_create_block(user_question)
-            }
+        response = slack_client.chat_postMessage(
+            channel_id=request.data['channel_id'],
+            blocks=blocks.confirm_question_create_block(user_question)
         )
+        print(response)
     else:
         print(request.data)
 

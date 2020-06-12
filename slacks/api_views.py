@@ -8,6 +8,9 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from slacks import blocks
+from slacks.backends import (
+    create_channel_members_dict,
+)
 from questions.models import Question
 
 from slack import WebClient
@@ -31,9 +34,9 @@ def interactive_commands(request):
     channel_id = data['channel']['id']
     if action_id == "urgency_select":
         value_list = actions['selected_option']['value'].split(",")
-        print(value_list)
         question = Question.objects.get(public_id=value_list[0])
         question.status = value_list[1]
+        question.responses = create_channel_members_dict(question.channel_id, question.created_by)
         question.save()
         block = blocks.question_block(question.question_text, value_list[1], question.public_id)
         requests.post(
@@ -41,7 +44,8 @@ def interactive_commands(request):
             json={
                 "channel": channel_id,
                 "blocks": block,
-                "reply_broadcast": True,
+                "response_type": "in_channel",
+                "replace_original": "true",
             })
     elif action_id == 'cancel_question':
         requests.post(
@@ -66,7 +70,7 @@ def interactive_commands(request):
     elif action_id == 'new_yes_no_question':
         pass
 
-    return Response(data, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_200_OK)
 
 
 '''
@@ -77,7 +81,6 @@ def interactive_commands(request):
 @csrf_exempt
 @api_view(['POST', ])
 def question(request):
-    print(request.data)
     if request.data['command'] == '/question':
         user_question = "*%s*" % request.data['text']
         channel_id = request.data['channel_id']

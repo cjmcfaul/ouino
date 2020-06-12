@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+from django.contrib.postgres.fields import HStoreField
 
 
 # Create your models here.
@@ -17,6 +18,11 @@ class Question(models.Model):
         unique=True,
         editable=False
     )
+    created = models.DateTimeField(
+        auto_now_add=True,
+        blank=True,
+        null=True
+    )
     created_by = models.CharField(
         max_length=100,
     )
@@ -32,7 +38,16 @@ class Question(models.Model):
     channel_id = models.CharField(
         max_length=100,
     )
+    responses = HStoreField(
+        blank=True,
+        null=True
+    )
     message_ts = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True
+    )
+    response_message_ts = models.CharField(
         max_length=100,
         blank=True,
         null=True

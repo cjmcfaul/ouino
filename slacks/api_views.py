@@ -32,9 +32,10 @@ def interactive_commands(request):
     question_text = ''
     if action_id == "urgency_select":
         urgency = actions['selected_option']['value']
+        block = blocks.question_block(question_text, urgency)
         slack_client.chat_postMessage(
             channel=channel_id,
-            blocks=blocks.question_block(question_text, urgency)
+            blocks=block
         )
     if action_id == 'cancel_question':
         requests.post(

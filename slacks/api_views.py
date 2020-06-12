@@ -78,8 +78,12 @@ def question(request):
     print(request.data)
     if request.data['command'] == '/question':
         user_question = "*%s*" % request.data['text']
+        if request.data['channel_name'] == 'directmessage':
+            channel_id = request.data['user_id']
+        else:
+            channel_id = request.data['channel_id']
         slack_client.chat_postMessage(
-            channel=request.data['channel_id'],
+            channel=channel_id,
             blocks=blocks.confirm_question_create_block(user_question)
         )
     else:

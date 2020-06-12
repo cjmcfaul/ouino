@@ -25,7 +25,6 @@ slack_client = WebClient(SLACK_BOT_TOKEN)
 def interactive_commands(request):
 
     data = json.loads(request.data['payload'])
-    print(data)
     actions = data['actions'][0]
     action_id = actions['action_id']
     channel_id = data['channel']['id']

@@ -38,12 +38,13 @@ def interactive_commands(request):
         question.status = value_list[1]
         if question.channel_id[0] != 'D':
             question.responses = create_channel_members_dict(question.channel_id, question.created_by)
+        else:
+            print(data)
         question.save()
         block = blocks.question_block(question.question_text, value_list[1], question.public_id)
         response_data = {
                 "channel": channel_id,
                 "blocks": block,
-                "response_type": "in_channel",
                 "replace_original": "true",
             }
 
@@ -52,29 +53,52 @@ def interactive_commands(request):
             json=response_data
         )
     elif action_id == 'cancel_question':
+        value_list = actions['selected_option']['value'].split(",")
+        question = Question.objects.get(public_id=value_list[0])
         requests.post(
             url=data['response_url'],
             json={
                 "delete_original": "true",
             })
+        question.delete()
     elif action_id == 'question_response_yes':
         question = Question.objects.get(public_id=actions['value'])
-        slack_client.chat_postMessage(
-            channel=question.created_by,
-            blocks=blocks.question_response('yes', question.question_text, data['user']['username']),
-            reply_broadcast=True
-        )
-        question.responses[data['user']['id']]['answer'] = 'yes'
-        question.save()
+        if question.created_by != data['user']['id']:
+            if question.responses[data['user']['id']]['answer'] is None:
+                if not question.response_message_ts:
+                    response = slack_client.chat_postMessage(
+                        channel=question.created_by,
+                        blocks=blocks.question_response('yes', question.question_text, data['user']['username']),
+                        reply_broadcast=True
+                    )
+                    question.response_message_ts = response['ts']
+                else:
+                    slack_client.chat_update(
+                        channel=question.channel_id,
+                        ts=question.response_message_ts,
+                        attachments=blocks.question_response('yes', question.question_text, data['user']['username']),
+                    )
+                question.responses[data['user']['id']]['answer'] = 'yes'
+                question.save()
     elif action_id == 'question_response_no':
         question = Question.objects.get(public_id=actions['value'])
-        slack_client.chat_postMessage(
-            channel=question.created_by,
-            blocks=blocks.question_response('no', question.question_text, data['user']['username']),
-            reply_broadcast=True
-        )
-        question.responses[data['user']['id']]['answer'] = 'no'
-        question.save()
+        if question.created_by != data['user']['id']:
+            if question.responses[data['user']['id']]['answer'] is None:
+                if not question.response_message_ts:
+                    response = slack_client.chat_postMessage(
+                        channel=question.created_by,
+                        blocks=blocks.question_response('no', question.question_text, data['user']['username']),
+                        reply_broadcast=True
+                    )
+                    question.response_message_ts = response['ts']
+                else:
+                    slack_client.chat_update(
+                        channel=question.channel_id,
+                        ts=question.response_message_ts,
+                        attachments=blocks.question_response('no', question.question_text, data['user']['username']),
+                    )
+                question.responses[data['user']['id']]['answer'] = 'no'
+                question.save()
     elif action_id == 'new_yes_no_question':
         pass
 

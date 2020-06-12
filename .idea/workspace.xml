@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed091cee-21c9-4f48-9338-acd1ce606530" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/questions/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/questions/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/slacks/api_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/slacks/api_views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -83,6 +82,15 @@
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/.env">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="60">
+                  <caret line="4" column="73" lean-forward="true" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="73" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/yes_no/settings.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="419">
@@ -109,8 +117,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/slacks/api_views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="407">
-                  <caret line="53" column="49" selection-start-line="53" selection-start-column="49" selection-end-line="53" selection-end-column="49" />
+                <state relative-caret-position="561">
+                  <caret line="78" column="36" selection-start-line="78" selection-start-column="36" selection-end-line="78" selection-end-column="36" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
                   </folding>
@@ -514,13 +522,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="73" lean-forward="true" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/questions/migrations/0004_question_response_message_ts.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -590,10 +591,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="73" lean-forward="true" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/slacks/api_views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="53" column="49" selection-start-line="53" selection-start-column="49" selection-end-line="53" selection-end-column="49" />
+        <state relative-caret-position="561">
+          <caret line="78" column="36" selection-start-line="78" selection-start-column="36" selection-end-line="78" selection-end-column="36" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>

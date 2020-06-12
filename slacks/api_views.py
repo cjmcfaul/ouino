@@ -43,9 +43,11 @@ def interactive_commands(request):
                 "reply_broadcast": True
             }
     elif action_id == 'cancel_question':
-        data={
+        requests.post(
+            url=data['response_url'],
+            json={
                 "delete_original": "true",
-            }
+            })
     elif action_id == 'question_response_yes':
         question = Question.objects.get(public_id=actions['value'])
         data = {

@@ -2,7 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed091cee-21c9-4f48-9338-acd1ce606530" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/android-icon-144x144.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/android-icon-192x192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/android-icon-36x36.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/android-icon-48x48.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/android-icon-72x72.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/android-icon-96x96.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/apple-icon-114x114.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/apple-icon-120x120.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/apple-icon-144x144.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/apple-icon-152x152.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/apple-icon-180x180.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/apple-icon-57x57.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/apple-icon-60x60.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/apple-icon-72x72.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/apple-icon-76x76.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/apple-icon-precomposed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/apple-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/browserconfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/favicon-16x16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/favicon-32x32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/favicon-96x96.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/ms-icon-144x144.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/ms-icon-150x150.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/ms-icon-310x310.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/favicon/ms-icon-70x70.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,33 +50,6 @@
                   <folding>
                     <element signature="e#0#28#0" expanded="true" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/heroku.yml">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="135">
-                  <caret line="9" column="46" lean-forward="true" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="46" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/Dockerfile">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="120">
-                  <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/docker-compose.yml">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="270">
-                  <caret line="18" column="12" lean-forward="true" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
                 </state>
               </provider>
             </entry>
@@ -74,11 +75,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/templates/base.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="45">
-                  <caret line="3" column="29" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
+                <state relative-caret-position="90">
+                  <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
                 </state>
               </provider>
             </entry>
@@ -117,8 +118,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/yes_no/settings.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2499">
-                  <caret line="178" column="83" selection-start-line="178" selection-start-column="83" selection-end-line="178" selection-end-column="83" />
+                <state relative-caret-position="550">
+                  <caret line="177" column="65" selection-start-line="177" selection-start-column="65" selection-end-line="177" selection-end-column="65" />
                   <folding>
                     <element signature="e#307#316#0" expanded="true" />
                   </folding>
@@ -215,10 +216,10 @@
         <option value="$PROJECT_DIR$/questions/models.py" />
         <option value="$PROJECT_DIR$/slacks/blocks.py" />
         <option value="$PROJECT_DIR$/slacks/api_views.py" />
-        <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/yes_no/asgi.py" />
-        <option value="$PROJECT_DIR$/yes_no/settings.py" />
         <option value="$PROJECT_DIR$/Dockerfile" />
+        <option value="$PROJECT_DIR$/yes_no/settings.py" />
+        <option value="$PROJECT_DIR$/templates/base.html" />
       </list>
     </option>
   </component>
@@ -302,6 +303,7 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/static/media/imgs" />
+      <recent name="$PROJECT_DIR$/static/favicon" />
       <recent name="$PROJECT_DIR$/static/js" />
       <recent name="$PROJECT_DIR$/static/css" />
     </key>
@@ -336,7 +338,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="809" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13319239" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -434,16 +435,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/slacks/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/slacks/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -507,13 +498,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="29" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -548,20 +532,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yes_no/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2499">
-          <caret line="178" column="83" selection-start-line="178" selection-start-column="83" selection-end-line="178" selection-end-column="83" />
-          <folding>
-            <element signature="e#307#316#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/home.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="325">
           <caret line="76" column="55" selection-start-line="76" selection-start-column="55" selection-end-line="76" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yes_no/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="177" column="65" selection-start-line="177" selection-start-column="65" selection-end-line="177" selection-end-column="65" />
+          <folding>
+            <element signature="e#307#316#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -572,10 +563,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Dockerfile">
+    <entry file="file://$PROJECT_DIR$/slacks/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+        <state relative-caret-position="105">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/favicon/favicon-32x32.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/favicon/favicon-16x16.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/favicon/apple-icon.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
         </state>
       </provider>
     </entry>

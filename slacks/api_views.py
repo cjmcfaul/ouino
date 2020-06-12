@@ -42,7 +42,6 @@ def interactive_commands(request):
                 "channel": channel_id,
                 "blocks": block,
                 "reply_broadcast": True,
-                "replace_original": "true"
             })
     elif action_id == 'cancel_question':
         requests.post(

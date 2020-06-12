@@ -65,9 +65,15 @@
 
 <div class="waiting-list-background">
     <div class="waiting-list-background-screen"></div>
-    <div class="logo-container d-flex">
-        <img src="{% static 'media/imgs/election.png' %}">
-        <h3>Ouino</h3>
+    <div class="logo-container d-flex justify-content-between">
+        <div class="d-flex">
+            <img src="{% static 'media/imgs/election.png' %}">
+            <h3>Ouino</h3>
+        </div>
+        <a href="https://slack.com/oauth/v2/authorize?client_id=1173465096773.1187470693665&scope=commands&user_scope=im:write,chat:write"><img
+                        alt="Add to Slack" height="40" width="139"
+                        src="https://platform.slack-edge.com/img/add_to_slack.png"
+                        srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"></a>
     </div>
     <div class="d-flex justify-content-center align-items-center wait-list-form-container pb-5">
         <div class="wait-list-form-box text-center">
@@ -79,11 +85,12 @@
                     </a>
                 </h1>
             </div>
+            <div class="d-flex justify-content-center pt-3">
+                <button type="button" class="btn btn-success mr-3">Yes</button>
+                <button type="button" class="btn btn-danger">No</button>
+            </div>
             <div class="d-flex justify-content-center pt-5">
-                <a href="https://slack.com/oauth/v2/authorize?client_id=1173465096773.1187470693665&scope=commands&user_scope=im:write,chat:write"><img
-                        alt="Add to Slack" height="40" width="139"
-                        src="https://platform.slack-edge.com/img/add_to_slack.png"
-                        srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"></a>
+
             </div>
         </div>
     </div>

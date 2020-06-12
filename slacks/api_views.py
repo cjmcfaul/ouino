@@ -60,7 +60,6 @@ def question(request):
             channel=request.data['channel_id'],
             blocks=blocks.confirm_question_create_block(user_question)
         )
-        print(response)
     else:
         print(request.data)
 

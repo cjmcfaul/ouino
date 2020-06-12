@@ -58,7 +58,7 @@ def interactive_commands(request):
             }
         )
     if action_id == 'question_response_yes':
-        question = Question.objects.get(public_id=actions['selected_option']['value'])
+        question = Question.objects.get(public_id=actions['value'])
         response = slack_client.chat_postMessage(
             channel=question.created_by,
             blocks=blocks.question_response('yes', question.question_text, data['user']['id']),

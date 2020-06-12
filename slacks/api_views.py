@@ -57,7 +57,7 @@ def question(request):
     if request.data['command'] == '/question':
         user_question = "*Question:* %s" % request.data['text']
         response = slack_client.chat_postMessage(
-            channel_id=request.data['channel_id'],
+            channel=request.data['channel_id'],
             blocks=blocks.confirm_question_create_block(user_question)
         )
         print(response)

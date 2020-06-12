@@ -39,7 +39,7 @@ def interactive_commands(request):
         question.responses = create_channel_members_dict(question.channel_id, question.created_by)
         question.save()
         block = blocks.question_block(question.question_text, value_list[1], question.public_id)
-        requests.post(
+        response = requests.post(
             url=data['response_url'],
             json={
                 "channel": channel_id,
@@ -47,6 +47,7 @@ def interactive_commands(request):
                 "response_type": "in_channel",
                 "replace_original": "true",
             })
+        print(response)
     elif action_id == 'cancel_question':
         requests.post(
             url=data['response_url'],
@@ -60,6 +61,8 @@ def interactive_commands(request):
             blocks=blocks.question_response('yes', question.question_text, data['user']['username']),
             reply_broadcast=True
         )
+        question.responses[data['user']['id']]['answer'] = 'yes'
+        question.save()
     elif action_id == 'question_response_no':
         question = Question.objects.get(public_id=actions['value'])
         slack_client.chat_postMessage(
@@ -67,6 +70,8 @@ def interactive_commands(request):
             blocks=blocks.question_response('no', question.question_text, data['user']['username']),
             reply_broadcast=True
         )
+        question.responses[data['user']['id']]['answer'] = 'no'
+        question.save()
     elif action_id == 'new_yes_no_question':
         pass
 

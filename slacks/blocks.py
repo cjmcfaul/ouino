@@ -1,4 +1,4 @@
-def question_block(question_text, urgency):
+def question_block(question_text, urgency, question_public_id):
 
     status = {
         'U': ":rotating_light: *Urgent:* respond in the next 3 hours",
@@ -24,7 +24,7 @@ def question_block(question_text, urgency):
                         "text": "Yes"
                     },
                     "style": "primary",
-                    "value": "yes",
+                    "value": str(question_public_id),
                     "action_id": "question_response_yes"
                 },
                 {
@@ -34,7 +34,7 @@ def question_block(question_text, urgency):
                         "text": "No"
                     },
                     "style": "danger",
-                    "value": "no",
+                    "value": str(question_public_id),
                     "action_id": "question_response_no"
                 }
             ]
@@ -47,6 +47,32 @@ def question_block(question_text, urgency):
                     "text": status[urgency]
                 }
             ]
+        }
+    ]
+    return block
+
+
+def question_response(answer, question_text, username):
+
+    if answer == 'yes':
+        value_text = "@%s :white_check_mark:" % username
+    elif answer == 'no':
+        value_text = "@%s :x:" % username
+
+    block = [
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": question_text
+            }
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": value_text
+            }
         }
     ]
     return block

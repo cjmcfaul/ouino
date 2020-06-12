@@ -32,7 +32,12 @@ def interactive_commands(request):
     channel_id = data['channel']['id']
     if action_id == "urgency_select":
         question_text = data['message']['blocks'][0]['text']['text']
-        block = blocks.question_block(question_text, actions['selected_option']['value'])
+        question = Question.objects.create(
+            created_by=data['user']['id'],
+            question_text=question_text,
+            channel_id=channel_id
+        )
+        block = blocks.question_block(question_text, actions['selected_option']['value'], question.public_id)
         response = slack_client.chat_postMessage(
             channel=channel_id,
             blocks=block,
@@ -45,11 +50,6 @@ def interactive_commands(request):
                 "delete_original": "true",
             }
         )
-        question = Question.objects.create(
-            created_by=data[''],
-            question_text=question_text,
-            channel_id=channel_id
-        )
     if action_id == 'cancel_question':
         requests.post(
             url=data['response_url'],
@@ -58,9 +58,18 @@ def interactive_commands(request):
             }
         )
     if action_id == 'question_response_yes':
-        pass
+        question = Question.objects.get(public_id=actions['selected_option']['value'])
+        response = slack_client.chat_postMessage(
+            channel=question.created_by,
+            blocks=blocks.question_response('yes', question.question_text, data['user']['id']),
+            reply_broadcast=True
+        )
     if action_id == 'question_response_no':
-        pass
+        response = slack_client.chat_postMessage(
+            channel=question.created_by,
+            blocks=blocks.question_response('no', question.question_text, data['user']['id']),
+            reply_broadcast=True
+        )
     if action_id == 'new_yes_no_question':
         pass
 

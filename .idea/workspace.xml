@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ed091cee-21c9-4f48-9338-acd1ce606530" name="Default Changelist" comment="" />
+    <list default="true" id="ed091cee-21c9-4f48-9338-acd1ce606530" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/slacks/api_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/slacks/api_views.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +30,7 @@
             <entry file="file://$PROJECT_DIR$/slacks/blocks.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="750">
-                  <caret line="50" column="5" lean-forward="true" selection-start-line="8" selection-start-column="12" selection-end-line="50" selection-end-column="5" />
+                  <caret line="50" column="5" selection-start-line="8" selection-start-column="12" selection-end-line="50" selection-end-column="5" />
                 </state>
               </provider>
             </entry>
@@ -97,8 +99,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/yes_no/settings.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="553">
-                  <caret line="39" column="5" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
+                <state relative-caret-position="286">
+                  <caret line="56" column="37" selection-start-line="56" selection-start-column="37" selection-end-line="56" selection-end-column="37" />
                   <folding>
                     <element signature="e#307#316#0" expanded="true" />
                   </folding>
@@ -130,8 +132,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/slacks/api_views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="155">
-                  <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
+                <state relative-caret-position="538">
+                  <caret line="49" column="33" selection-start-line="49" selection-start-column="33" selection-end-line="49" selection-end-column="33" />
                   <folding>
                     <element signature="e#0#9#0" expanded="true" />
                   </folding>
@@ -181,13 +183,13 @@
         <option value="$PROJECT_DIR$/slacks/api_urls.py" />
         <option value="$PROJECT_DIR$/slacks/views.py" />
         <option value="$PROJECT_DIR$/heroku.yml" />
-        <option value="$PROJECT_DIR$/yes_no/settings.py" />
         <option value="$PROJECT_DIR$/templates/home.html" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/slacks/models.py" />
         <option value="$PROJECT_DIR$/slacks/blocks.py" />
-        <option value="$PROJECT_DIR$/slacks/api_views.py" />
         <option value="$PROJECT_DIR$/questions/models.py" />
+        <option value="$PROJECT_DIR$/yes_no/settings.py" />
+        <option value="$PROJECT_DIR$/slacks/api_views.py" />
       </list>
     </option>
   </component>
@@ -279,7 +281,7 @@
     <frame x="0" y="23" width="1440" height="809" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13319239" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.13319239" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -437,16 +439,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yes_no/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="553">
-          <caret line="39" column="5" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
-          <folding>
-            <element signature="e#307#316#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/slacks/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -461,20 +453,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/slacks/api_views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/slacks/blocks.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="750">
-          <caret line="50" column="5" lean-forward="true" selection-start-line="8" selection-start-column="12" selection-end-line="50" selection-end-column="5" />
+          <caret line="50" column="5" selection-start-line="8" selection-start-column="12" selection-end-line="50" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -484,6 +466,26 @@
           <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
           <folding>
             <element signature="e#0#6#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yes_no/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="56" column="37" selection-start-line="56" selection-start-column="37" selection-end-line="56" selection-end-column="37" />
+          <folding>
+            <element signature="e#307#316#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/slacks/api_views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="538">
+          <caret line="49" column="33" selection-start-line="49" selection-start-column="33" selection-end-line="49" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>

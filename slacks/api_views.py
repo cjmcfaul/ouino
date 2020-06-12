@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from slacks import blocks
+from questions import Question
 
 from slack import WebClient
 import requests
@@ -32,16 +33,22 @@ def interactive_commands(request):
     if action_id == "urgency_select":
         question_text = data['message']['blocks'][0]['text']['text']
         block = blocks.question_block(question_text, actions['selected_option']['value'])
-        slack_client.chat_postMessage(
+        response = slack_client.chat_postMessage(
             channel=channel_id,
             blocks=block,
             reply_broadcast=True
         )
+        print(response.data)
         requests.post(
             url=data['response_url'],
             json={
                 "delete_original": "true",
             }
+        )
+        question = Question.objects.create(
+            created_by=data[''],
+            question_text=question_text,
+            channel_id=channel_id
         )
     if action_id == 'cancel_question':
         requests.post(
@@ -68,6 +75,7 @@ def interactive_commands(request):
 @csrf_exempt
 @api_view(['POST', ])
 def question(request):
+    print(request.data)
     if request.data['command'] == '/question':
         user_question = "*%s*" % request.data['text']
         slack_client.chat_postMessage(

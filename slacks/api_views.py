@@ -38,16 +38,13 @@ def interactive_commands(request):
         question.status = value_list[1]
         if question.channel_id[0] != 'D':
             question.responses = create_channel_members_dict(question.channel_id, question.created_by)
-        else:
-            print(data)
         question.save()
         block = blocks.question_block(question.question_text, value_list[1], question.public_id)
         response_data = {
-                "channel": channel_id,
-                "blocks": block,
-                "replace_original": "true",
-            }
-
+            "channel": channel_id,
+            "blocks": block,
+            "replace_original": "true",
+        }
         requests.post(
             url=data['response_url'],
             json=response_data
@@ -116,15 +113,28 @@ def question(request):
     if request.data['command'] == '/question':
         user_question = "*%s*" % request.data['text']
         channel_id = request.data['channel_id']
-        question = Question.objects.create(
-            created_by=request.data['user_id'],
-            question_text=user_question,
-            channel_id=channel_id
-        )
-        data = {
-            "channel": channel_id,
-            "blocks": blocks.confirm_question_create_block(user_question, question.public_id)
-        }
+        if len(request.data['text']) > 140:
+            data = {
+                "channel": channel_id,
+                "text": "Your question is longer than 140 characters."
+            }
+        elif "?" not in request.data['text']:
+            data = {
+                "channel": channel_id,
+                "text": "We didn't notice a question mark. Are you sure you're asking a quesiton?"
+            }
+        else:
+            question = Question.objects.create(
+                created_by=request.data['user_id'],
+                question_text=user_question,
+                channel_id=channel_id
+            )
+            data = {
+                "channel": channel_id,
+                "blocks": blocks.confirm_question_create_block(user_question, question.public_id)
+            }
+            if channel_id[0] == 'D':
+                data['response_type'] = 'in_channel'
 
     else:
         print(request.data)

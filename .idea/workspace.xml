@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ed091cee-21c9-4f48-9338-acd1ce606530" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yes_no/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/yes_no/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -90,8 +91,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/yes_no/settings.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-13">
-                  <caret line="66" column="21" lean-forward="true" selection-start-line="66" selection-start-column="21" selection-end-line="66" selection-end-column="21" />
+                <state relative-caret-position="494">
+                  <caret line="172" column="79" selection-start-line="172" selection-start-column="79" selection-end-line="172" selection-end-column="79" />
                   <folding>
                     <element signature="e#307#316#0" expanded="true" />
                   </folding>
@@ -178,10 +179,10 @@
         <option value="$PROJECT_DIR$/static/css/style.css" />
         <option value="$PROJECT_DIR$/templates/home.html" />
         <option value="$PROJECT_DIR$/questions/models.py" />
-        <option value="$PROJECT_DIR$/yes_no/settings.py" />
         <option value="$PROJECT_DIR$/slacks/blocks.py" />
         <option value="$PROJECT_DIR$/slacks/api_views.py" />
         <option value="$PROJECT_DIR$/templates/base.html" />
+        <option value="$PROJECT_DIR$/yes_no/settings.py" />
       </list>
     </option>
   </component>
@@ -509,8 +510,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/yes_no/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-13">
-          <caret line="66" column="21" lean-forward="true" selection-start-line="66" selection-start-column="21" selection-end-line="66" selection-end-column="21" />
+        <state relative-caret-position="494">
+          <caret line="172" column="79" selection-start-line="172" selection-start-column="79" selection-end-line="172" selection-end-column="79" />
           <folding>
             <element signature="e#307#316#0" expanded="true" />
           </folding>

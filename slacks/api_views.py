@@ -10,6 +10,7 @@ from rest_framework import status
 from slacks import blocks
 from slacks.backends import (
     create_channel_members_dict,
+    question_response
 )
 from questions.models import Question
 
@@ -60,42 +61,10 @@ def interactive_commands(request):
         question.delete()
     elif action_id == 'question_response_yes':
         question = Question.objects.get(public_id=actions['value'])
-        if question.created_by != data['user']['id']:
-            if question.responses[data['user']['id']]['answer'] is None:
-                if not question.response_message_ts:
-                    response = slack_client.chat_postMessage(
-                        channel=question.created_by,
-                        blocks=blocks.question_response('yes', question.question_text, data['user']['username']),
-                        reply_broadcast=True
-                    )
-                    question.response_message_ts = response['ts']
-                else:
-                    slack_client.chat_update(
-                        channel=question.channel_id,
-                        ts=question.response_message_ts,
-                        attachments=blocks.question_response('yes', question.question_text, data['user']['username']),
-                    )
-                question.responses[data['user']['id']]['answer'] = 'yes'
-                question.save()
+        question_response(data, question, 'yes')
     elif action_id == 'question_response_no':
         question = Question.objects.get(public_id=actions['value'])
-        if question.created_by != data['user']['id']:
-            if question.responses[data['user']['id']]['answer'] is None:
-                if not question.response_message_ts:
-                    response = slack_client.chat_postMessage(
-                        channel=question.created_by,
-                        blocks=blocks.question_response('no', question.question_text, data['user']['username']),
-                        reply_broadcast=True
-                    )
-                    question.response_message_ts = response['ts']
-                else:
-                    slack_client.chat_update(
-                        channel=question.channel_id,
-                        ts=question.response_message_ts,
-                        attachments=blocks.question_response('no', question.question_text, data['user']['username']),
-                    )
-                question.responses[data['user']['id']]['answer'] = 'no'
-                question.save()
+        question_response(data, question, 'no')
     elif action_id == 'new_yes_no_question':
         pass
 

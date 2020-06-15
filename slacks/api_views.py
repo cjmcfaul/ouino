@@ -34,6 +34,7 @@ def interactive_commands(request):
     action_id = actions['action_id']
     channel_id = data['channel']['id']
     if action_id == "urgency_select":
+        print(data)
         value_list = actions['selected_option']['value'].split(",")
         question = Question.objects.get(public_id=value_list[0])
         question.status = value_list[1]
@@ -44,7 +45,7 @@ def interactive_commands(request):
         response_data = {
             "channel": channel_id,
             "blocks": block,
-            "replace_original": False,
+            "replace_original": "false",
             "response_type": "in_channel"
         }
     elif action_id == 'cancel_question':

@@ -16,15 +16,20 @@ def create_channel_members_dict(channel_id, created_by):
     response = slack_client.conversations_members(channel=channel_id)
     for member in response['members']:
         if member != created_by:
-            response = slack_client.api_call(
-                api_method='users.info',
-                json={'user': member}
-            )
-            if not response['user']['is_bot']:
-                member_dict[member] = {
-                    'answer': None,
-                    'username': response['user']['name']
-                }
+            try:
+                user_info = slack_client.api_call(
+                    api_method='users.info',
+                    json={'user': member}
+                )
+            except:
+                print('error on user lookup')
+                user_info = None
+            if user_info:
+                if not user_info['user']['is_bot']:
+                    member_dict[member] = {
+                        'answer': None,
+                        'username': user_info['user']['name']
+                    }
 
     return member_dict
 

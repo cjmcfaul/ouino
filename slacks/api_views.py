@@ -40,12 +40,13 @@ def interactive_commands(request):
         question.status = value_list[1]
         if question.channel_id[0] != 'D':
             question.responses = create_channel_members_dict(question.channel_id, question.created_by)
+        question.message_ts = data['container']['message_ts']
         question.save()
         block = blocks.question_block(question.question_text, value_list[1], question.public_id)
         response_data = {
             "channel": channel_id,
             "blocks": block,
-            "replace_original": "false",
+            "replace_original": False,
             "response_type": "in_channel"
         }
     elif action_id == 'cancel_question':
@@ -66,7 +67,8 @@ def interactive_commands(request):
     elif action_id == 'new_yes_no_question':
         pass
 
-    return Response(response_data, status=status.HTTP_200_OK)
+    print(response_data)
+    return Response(response_data, status=status.HTTP_200_OK, content_type='application/json')
 
 
 '''

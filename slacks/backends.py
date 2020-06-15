@@ -26,7 +26,7 @@ def create_channel_members_dict(channel_id, created_by):
 def question_response(data, question, answer):
     new_message = False
     print(data)
-    print(question.responeses)
+    print(question.responses)
     if question.created_by != data['user']['id']:
         if question.responses is None:
             question.responses = {

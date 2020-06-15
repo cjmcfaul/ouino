@@ -46,10 +46,16 @@ def interactive_commands(request):
             "blocks": block,
             "response_type": "in_channel"
         }
-        requests.post(
+        response = requests.post(
             url=data['response_url'],
             json=response_data
         )
+        requests.post(
+            url=data['response_url'],
+            json={
+                "delete_original": "true",
+            })
+        print(response)
     elif action_id == 'cancel_question':
         value_list = actions['selected_option']['value'].split(",")
         question = Question.objects.get(public_id=value_list[0])

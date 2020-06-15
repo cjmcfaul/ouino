@@ -37,7 +37,7 @@ def question_response(data, question, answer):
         if question.responses is None:
             question.responses = {
                 data['user']['id']: {
-                    'answer': None,
+                    'answer': answer,
                     'username': data['user']['username']
                 }
             }
@@ -47,6 +47,12 @@ def question_response(data, question, answer):
             if question.responses[data['user']['id']]['answer'] is None:
                 question.responses[data['user']['id']]['answer'] = answer
                 new_message = True
+        else:
+            question.responses[data['user']['id']] = {
+                'answer': answer,
+                'username': data['user']['username']
+            }
+            new_message = True
 
         if new_message:
             if not question.response_message_ts:

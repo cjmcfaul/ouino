@@ -53,7 +53,7 @@ def interactive_commands(request):
                 "response_type": "in_channel"
         })
     elif action_id == 'cancel_question':
-        question = Question.objects.get(public_id=actions['selected_option']['value'])
+        question = Question.objects.get(public_id=actions['value'])
         requests.post(
             url=data['response_url'],
             json={

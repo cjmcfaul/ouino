@@ -43,12 +43,15 @@ def interactive_commands(request):
         question.message_ts = data['container']['message_ts']
         question.save()
         block = blocks.question_block(question.question_text, value_list[1], question.public_id)
-        response_data = {
+        response = requests.post(
+            url=data['response_url'],
+            json={
             "channel": channel_id,
             "blocks": block,
             "replace_original": False,
             "response_type": "in_channel"
-        }
+        })
+        print(response)
     elif action_id == 'cancel_question':
         question = Question.objects.get(public_id=actions['selected_option']['value'])
         requests.post(
@@ -66,7 +69,7 @@ def interactive_commands(request):
     elif action_id == 'new_yes_no_question':
         pass
 
-    return Response(json.dumps(response_data), status=status.HTTP_200_OK, content_type='application/json')
+    return Response(response_data, status=status.HTTP_200_OK, content_type='application/json')
 
 
 '''

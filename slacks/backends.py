@@ -25,6 +25,8 @@ def create_channel_members_dict(channel_id, created_by):
 
 def question_response(data, question, answer):
     new_message = False
+    print(data)
+    print(question.responeses)
     if question.created_by != data['user']['id']:
         if question.responses is None:
             question.responses = {
@@ -34,6 +36,7 @@ def question_response(data, question, answer):
             }
             new_message = True
         elif data['user']['id'] in question.responses:
+            print(question.responses[data['user']['id']]['answer'])
             if question.responses[data['user']['id']]['answer'] is None:
                 question.responses[data['user']['id']]['answer'] = answer
                 new_message = True
@@ -53,3 +56,8 @@ def question_response(data, question, answer):
                     attachments=blocks.question_response(answer, question.question_text, data['user']['username']),
                 )
             question.save()
+            return 'Thanks for responding!'
+        else:
+            return "You've already responded to this question"
+    else:
+        return "You can't answer your own question"

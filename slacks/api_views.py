@@ -52,7 +52,6 @@ def interactive_commands(request):
                 "delete_original": "true",
                 "response_type": "in_channel"
         })
-        print(response.data)
     elif action_id == 'cancel_question':
         question = Question.objects.get(public_id=actions['selected_option']['value'])
         requests.post(
@@ -63,7 +62,15 @@ def interactive_commands(request):
         question.delete()
     elif action_id == 'question_response_yes':
         question = Question.objects.get(public_id=actions['value'])
-        question_response(data, question, 'yes')
+        response_text = question_response(data, question, 'yes')
+        requests.post(
+            url=data['response_url'],
+            json={
+                "channel": channel_id,
+                "text": response_text,
+                "replace_original": False,
+                "response_type": "ephemeral"
+            })
     elif action_id == 'question_response_no':
         question = Question.objects.get(public_id=actions['value'])
         question_response(data, question, 'no')

@@ -44,7 +44,7 @@ def interactive_commands(request):
         response_data = {
             "channel": channel_id,
             "blocks": block,
-            "replace_original": "true",
+            "response_type": "in_channel"
         }
         requests.post(
             url=data['response_url'],
@@ -57,7 +57,7 @@ def interactive_commands(request):
             url=data['response_url'],
             json={
                 "delete_original": "true",
-            })
+        })
         question.delete()
     elif action_id == 'question_response_yes':
         question = Question.objects.get(public_id=actions['value'])

@@ -44,13 +44,9 @@ def interactive_commands(request):
         response_data = {
             "channel": channel_id,
             "blocks": block,
+            "replace_original": False,
             "response_type": "in_channel"
         }
-        response = requests.post(
-            url=data['response_url'],
-            json=response_data
-        )
-        print(response.data)
     elif action_id == 'cancel_question':
         value_list = actions['selected_option']['value'].split(",")
         question = Question.objects.get(public_id=value_list[0])
@@ -103,8 +99,6 @@ def question(request):
                 "channel": channel_id,
                 "blocks": blocks.confirm_question_create_block(user_question, question.public_id)
             }
-            if channel_id[0] == 'D':
-                data['response_type'] = 'in_channel'
 
     else:
         print(request.data)

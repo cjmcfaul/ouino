@@ -50,12 +50,7 @@ def interactive_commands(request):
             url=data['response_url'],
             json=response_data
         )
-        requests.post(
-            url=data['response_url'],
-            json={
-                "delete_original": "true",
-            })
-        print(response)
+        print(response.data)
     elif action_id == 'cancel_question':
         value_list = actions['selected_option']['value'].split(",")
         question = Question.objects.get(public_id=value_list[0])

@@ -50,8 +50,7 @@ def interactive_commands(request):
             "response_type": "in_channel"
         }
     elif action_id == 'cancel_question':
-        value_list = actions['selected_option']['value'].split(",")
-        question = Question.objects.get(public_id=value_list[0])
+        question = Question.objects.get(public_id=actions['selected_option']['value'])
         requests.post(
             url=data['response_url'],
             json={
@@ -67,8 +66,7 @@ def interactive_commands(request):
     elif action_id == 'new_yes_no_question':
         pass
 
-    print(response_data)
-    return Response(response_data, status=status.HTTP_200_OK, content_type='application/json')
+    return Response(json.dumps(response_data), status=status.HTTP_200_OK, content_type='application/json')
 
 
 '''

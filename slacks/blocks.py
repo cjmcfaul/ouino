@@ -128,7 +128,7 @@ def confirm_question_create_block(question_text, question_public_id):
                         "text": "Cancel"
                     },
                     "style": "danger",
-                    "value": "cancel",
+                    "value": "question_public_id",
                     "action_id": "cancel_question"
                 }
             ]

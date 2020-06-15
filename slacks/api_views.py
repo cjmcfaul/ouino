@@ -73,7 +73,15 @@ def interactive_commands(request):
             })
     elif action_id == 'question_response_no':
         question = Question.objects.get(public_id=actions['value'])
-        question_response(data, question, 'no')
+        response_text = question_response(data, question, 'no')
+        requests.post(
+            url=data['response_url'],
+            json={
+                "channel": channel_id,
+                "text": response_text,
+                "replace_original": False,
+                "response_type": "ephemeral"
+            })
     elif action_id == 'new_yes_no_question':
         pass
 

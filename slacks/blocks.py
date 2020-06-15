@@ -52,19 +52,22 @@ def question_block(question_text, urgency, question_public_id):
     return block
 
 
-def question_response(answer, question_text, username):
+def question_response(question):
 
-    if answer == 'yes':
-        value_text = "@%s :white_check_mark:" % username
-    elif answer == 'no':
-        value_text = "@%s :x:" % username
+    for user in question.responses:
+        if user.answer == 'yes':
+            value_text = "@%s :white_check_mark:" % user.username
+        elif user.answer == 'no':
+            value_text = "@%s :x:" % user.username
+        else:
+            value_text = "@%s :x:" % user.username
 
     block = [
         {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": question_text
+                "text": question.question_text
             }
         },
         {

@@ -16,9 +16,15 @@ def create_channel_members_dict(channel_id, created_by):
     response = slack_client.conversations_members(channel=channel_id)
     for member in response['members']:
         if member != created_by:
-            member_dict[member] = {
-                'answer': None,
-            }
+            response = slack_client.api_call(
+                api_method='users.info',
+                json={'user': member}
+            )
+            if not response['user']['is_bot']:
+                member_dict[member] = {
+                    'answer': None,
+                    'username': response['user']['name']
+                }
 
     return member_dict
 
@@ -32,6 +38,7 @@ def question_response(data, question, answer):
             question.responses = {
                 data['user']['id']: {
                     'answer': None,
+                    'username': data['user']['username']
                 }
             }
             new_message = True
@@ -45,7 +52,7 @@ def question_response(data, question, answer):
             if not question.response_message_ts:
                 response = slack_client.chat_postMessage(
                     channel=question.created_by,
-                    blocks=blocks.question_response(answer, question.question_text, data['user']['username']),
+                    blocks=blocks.question_response(question),
                     reply_broadcast=True
                 )
                 question.response_message_ts = response['ts']
@@ -53,7 +60,7 @@ def question_response(data, question, answer):
                 slack_client.chat_update(
                     channel=question.channel_id,
                     ts=question.response_message_ts,
-                    attachments=blocks.question_response(answer, question.question_text, data['user']['username']),
+                    attachments=blocks.question_response(question),
                 )
             question.save()
             return 'Thanks for responding!'

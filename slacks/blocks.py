@@ -55,6 +55,7 @@ def question_block(question_text, urgency, question_public_id):
 def question_response(question):
     value_block = ""
     for user in question.responses:
+        print(user)
         if user['answer'] == 'yes':
             value_text = "@%s :white_check_mark:" % user['username']
         elif user['answer'] == 'no':

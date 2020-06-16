@@ -17,6 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
 
+from users.views import (
+    support,
+)
+
 urlpatterns = [
     path(
         'api/',
@@ -24,6 +28,16 @@ urlpatterns = [
     ),
     path('slack/', include('slacks.urls')),
     path('admin/', admin.site.urls),
+    path(
+        'support/',
+        support,
+        name='support'
+    ),
+    path(
+        'privacy-policy/',
+        TemplateView.as_view(template_name='privacy_policy.html'),
+        name='privacy_policy'
+    ),
     path(
         '',
         TemplateView.as_view(template_name='home.html'),

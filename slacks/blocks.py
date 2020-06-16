@@ -1,9 +1,9 @@
 def question_block(question_text, urgency, question_public_id):
 
     status = {
-        'U': ":rotating_light: *Urgent* - respond in the next 3 hours",
-        'N': ":timer_clock: *Normal* - respond in the next 24 hours",
-        'W': ":snail: *Whenever* - respond in the next 72 hours"
+        'U': "*Urgent* :rotating_light: - respond in the next 3 hours",
+        'N': "*Normal* :timer_clock: - respond in the next 24 hours",
+        'W': "*Whenever* :snail: - respond in the next 72 hours"
     }
 
     block = [

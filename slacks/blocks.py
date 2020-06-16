@@ -53,14 +53,15 @@ def question_block(question_text, urgency, question_public_id):
 
 
 def question_response(question):
-
+    value_block = ""
     for user in question.responses:
-        if user.answer == 'yes':
-            value_text = "@%s :white_check_mark:" % user.username
-        elif user.answer == 'no':
-            value_text = "@%s :x:" % user.username
+        if user['answer'] == 'yes':
+            value_text = "@%s :white_check_mark:" % user['username']
+        elif user['answer'] == 'no':
+            value_text = "@%s :x:" % user['username']
         else:
-            value_text = "@%s :x:" % user.username
+            value_text = "@%s :hourglass_flowing_sand:" % user['username']
+        value_block = "%s\n" % value_text
 
     block = [
         {
@@ -74,7 +75,7 @@ def question_response(question):
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": value_text
+                "text": value_block
             }
         }
     ]

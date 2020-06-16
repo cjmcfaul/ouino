@@ -1,4 +1,5 @@
 import os
+import requests
 
 from slack import WebClient
 
@@ -16,14 +17,9 @@ def create_channel_members_dict(channel_id, created_by):
     response = slack_client.conversations_members(channel=channel_id)
     for member in response['members']:
         if member != created_by:
-            print(member)
-            api_data = {
-                'user': member,
-            }
-            print(api_data)
-            user_info = slack_client.api_call(
-                api_method='users.info',
-                json=api_data
+            url = "https://slack.com/api/users.info?token=%s&user=%s" %(SLACK_BOT_TOKEN, member)
+            user_info = requests.get(
+                url=url
             )
             if user_info:
                 if not user_info['user']['is_bot']:

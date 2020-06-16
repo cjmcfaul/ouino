@@ -47,9 +47,9 @@ def question_response(data, question, answer):
             }
             new_message = True
         elif data['user']['id'] in question.responses:
-            print(question.responses[data['user']['id']]['answer'])
-            if question.responses[data['user']['id']]['answer'] is None:
-                question.responses[data['user']['id']]['answer'] = answer
+            user_info = question.responses.get(data['user']['id'])
+            if user_info['answer'] is None:
+                user_info['answer'] = answer
                 new_message = True
         else:
             question.responses[data['user']['id']] = {

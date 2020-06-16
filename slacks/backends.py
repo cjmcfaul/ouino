@@ -75,3 +75,10 @@ def question_response(data, question, answer):
             return "You've already responded to this question"
     else:
         return "You can't answer your own question"
+
+
+def response_reminder(channel_id, question):
+    slack_client.chat_postMessage(
+        channel=channel_id,
+        blocks=blocks.response_reminder(question)
+    )

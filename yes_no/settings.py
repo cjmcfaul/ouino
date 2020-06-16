@@ -41,6 +41,7 @@ else:
     DEBUG = False
 
 SECRET_KEY = os.environ.get('SECRET_KEY', default='foo')
+REDIS_CELERY_URL = os.environ.get('REDIS_URL')
 
 
 ALLOWED_HOSTS = [
@@ -65,6 +66,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.staticfiles',
     'django.contrib.postgres',
+    'django_celery_beat',
+    'django_celery_results',
     'rest_framework',
 ]
 
@@ -170,6 +173,16 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+# Celery Settings
+
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_CACHE_BACKEND = 'django-cache'
+CELERY_BROKER_URL = REDIS_CELERY_URL
+CELERY_BROKER_POOL_LIMIT = None
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
 
 
 if HEROKU:

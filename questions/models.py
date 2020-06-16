@@ -1,4 +1,5 @@
 import uuid
+import datetime
 
 from django.db import models
 from django.contrib.postgres.fields import JSONField
@@ -55,3 +56,15 @@ class Question(models.Model):
 
     def __str__(self):
         return self.question_text
+
+    @property
+    def reminder_time(self):
+        if self.status == 'U':
+            remind = datetime.timedelta(hours=2, minutes=45)
+        elif self.status == 'N':
+            remind = datetime.timedelta(hours=23, minutes=45)
+        elif self.status == 'W':
+            remind = datetime.timedelta(hours=71, minutes=45)
+        else:
+            remind = None
+        return remind

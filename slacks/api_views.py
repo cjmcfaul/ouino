@@ -1,5 +1,6 @@
 import os
 import json
+import datetime
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -13,6 +14,7 @@ from slacks.backends import (
     question_response
 )
 from questions.models import Question
+from questions.tasks import respond_notify
 
 from slack import WebClient
 import requests
@@ -51,6 +53,9 @@ def interactive_commands(request):
                 "delete_original": "true",
                 "response_type": "in_channel"
         })
+        if question.reminder_time:
+            delivery = datetime.datetime.fromtimestamp(data['container']['message_ts']) + question.reminder_time
+            respond_notify.apply_async((question.public_id, ), eta=delivery)
     elif action_id == 'cancel_question':
         question = Question.objects.get(public_id=actions['value'])
         requests.post(

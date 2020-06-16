@@ -140,3 +140,66 @@ def confirm_question_create_block(question_text, question_public_id):
         }
     ]
     return block
+
+
+def response_reminder(question):
+    status = {
+        'U': ":rotating_light: *Urgent* - respond in the next 3 hours",
+        'N': ":timer_clock: *Normal* - respond in the next 24 hours",
+        'W': ":snail: *Whenever* - respond in the next 72 hours"
+    }
+
+    block = [
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "*You still need to answer this question*"
+            }
+        },
+        {
+            "type": "divider"
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": question.question_text
+            }
+        },
+        {
+            "type": "actions",
+            "elements": [
+                {
+                    "type": "button",
+                    "text": {
+                        "type": "plain_text",
+                        "text": "Yes"
+                    },
+                    "style": "primary",
+                    "value": str(question.public_id),
+                    "action_id": "question_response_yes"
+                },
+                {
+                    "type": "button",
+                    "text": {
+                        "type": "plain_text",
+                        "text": "No"
+                    },
+                    "style": "danger",
+                    "value": str(question.public_id),
+                    "action_id": "question_response_no"
+                }
+            ]
+        },
+        {
+            "type": "context",
+            "elements": [
+                {
+                    "type": "mrkdwn",
+                    "text": status[question.status]
+                }
+            ]
+        }
+    ]
+    return block

@@ -3,6 +3,7 @@ import json
 import datetime
 
 from django.views.decorators.csrf import csrf_exempt
+from django.utils import timezone
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -54,7 +55,7 @@ def interactive_commands(request):
                 "response_type": "in_channel"
         })
         if question.reminder_time:
-            delivery = datetime.datetime.fromtimestamp(float(data['container']['message_ts'])) + question.reminder_time
+            delivery = timezone.make_aware(datetime.datetime.fromtimestamp(float(data['container']['message_ts']))) + question.reminder_time
             respond_notify.apply_async((question.public_id, ), eta=delivery)
     elif action_id == 'cancel_question':
         question = Question.objects.get(public_id=actions['value'])

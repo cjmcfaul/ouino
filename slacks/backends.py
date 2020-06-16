@@ -17,9 +17,13 @@ def create_channel_members_dict(channel_id, created_by):
     for member in response['members']:
         if member != created_by:
             print(member)
+            api_data = {
+                'user': member,
+            }
+            print(api_data)
             user_info = slack_client.api_call(
                 api_method='users.info',
-                json={'user': member, }
+                json=api_data
             )
             if user_info:
                 if not user_info['user']['is_bot']:

@@ -25,10 +25,10 @@ def create_channel_members_dict(channel_id, created_by):
             user_info = json.loads(user_info.text)
             if user_info:
                 if not user_info['user']['is_bot']:
-                    member_dict[member] = {
+                    member_dict[member] = dict({
                         'answer': None,
                         'username': user_info['user']['name']
-                    }
+                    })
 
     return member_dict
 

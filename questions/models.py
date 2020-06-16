@@ -1,7 +1,7 @@
 import uuid
 
 from django.db import models
-from django.contrib.postgres.fields import HStoreField
+from django.contrib.postgres.fields import JSONField
 
 
 # Create your models here.
@@ -38,7 +38,7 @@ class Question(models.Model):
     channel_id = models.CharField(
         max_length=100,
     )
-    responses = HStoreField(
+    responses = JSONField(
         blank=True,
         null=True
     )

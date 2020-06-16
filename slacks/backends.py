@@ -23,12 +23,13 @@ def create_channel_members_dict(channel_id, created_by):
                 url=url
             )
             user_info = json.loads(user_info.text)
+            print(user_info)
             if user_info:
                 if not user_info['user']['is_bot']:
-                    member_dict[member] = dict({
+                    member_dict[member] = {
                         'answer': None,
                         'username': user_info['user']['name']
-                    })
+                    }
 
     return member_dict
 
@@ -47,9 +48,9 @@ def question_response(data, question, answer):
             }
             new_message = True
         elif data['user']['id'] in question.responses:
-            user_info = question.responses.get(data['user']['id'])
-            if user_info['answer'] is None:
-                user_info['answer'] = answer
+            print(question.responses[data['user']['id']]['answer'])
+            if question.responses[data['user']['id']]['answer'] is None:
+                question.responses[data['user']['id']]['answer'] = answer
                 new_message = True
         else:
             question.responses[data['user']['id']] = {

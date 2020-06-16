@@ -62,7 +62,7 @@ def question_response(question):
             value_text = "@%s :x:" % user_item['username']
         else:
             value_text = "@%s :hourglass_flowing_sand:" % user_item['username']
-        value_block = "%s\n" % value_text
+        value_block = "%s%s\n" % (value_block, value_text)
 
     block = [
         {

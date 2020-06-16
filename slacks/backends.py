@@ -1,5 +1,6 @@
 import os
 import requests
+import json
 
 from slack import WebClient
 
@@ -21,8 +22,7 @@ def create_channel_members_dict(channel_id, created_by):
             user_info = requests.get(
                 url=url
             )
-            user_info = user_info.text
-            print(user_info)
+            user_info = json.loads(user_info.text)
             if user_info:
                 if not user_info['user']['is_bot']:
                     member_dict[member] = {

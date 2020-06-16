@@ -55,13 +55,13 @@ def question_block(question_text, urgency, question_public_id):
 def question_response(question):
     value_block = ""
     for user in question.responses:
-        print(user)
-        if user['answer'] == 'yes':
-            value_text = "@%s :white_check_mark:" % user['username']
-        elif user['answer'] == 'no':
-            value_text = "@%s :x:" % user['username']
+        user_item = question.responses[user]
+        if user_item['answer'] == 'yes':
+            value_text = "@%s :white_check_mark:" % user_item['username']
+        elif user_item['answer'] == 'no':
+            value_text = "@%s :x:" % user_item['username']
         else:
-            value_text = "@%s :hourglass_flowing_sand:" % user['username']
+            value_text = "@%s :hourglass_flowing_sand:" % user_item['username']
         value_block = "%s\n" % value_text
 
     block = [

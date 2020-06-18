@@ -147,7 +147,7 @@ def question(request):
 @api_view(['POST', ])
 def events(request):
     print(request.data)
-    if request.data['token'] == SLACK_SIGNING_SECRET:
+    if request.META['x-slack-signature'] == SLACK_SIGNING_SECRET:
         if request.data['type'] == 'app_home_opened':
             data = {
 

@@ -20,25 +20,23 @@ body {
 }
 
 #landingVideo {
- position: fixed;
- right: 0;
- bottom: 0;
- left: 0;
- z-index: -2;
- max-width: 100%;
+     position: fixed;
+     right: 0;
+     bottom: 0;
+     left: 0;
+     z-index: -2;
+     max-width: 100%;
+     min-height: 100%;
+     object-fit: cover;
 }
 
-
-
-.waiting-list-background-screen {
-    background-color: #000000;
-    opacity: 0.3;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: -1;
-    border-top: 1px solid #efefef;
-    border-bottom: 1px solid #efefef;
+.landing-background-content {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.1);
+  color: #f1f1f1;
+  width: 100%;
+  top: 0;
 }
 
 .wait-list-form-container {
@@ -61,7 +59,7 @@ body {
     font-family: 'Ultra', serif;
 }
 
-.wait-list-form-box a,  .wait-list-form-box a:hover, .wait-list-form-box a:active{
+a.typewrite,  a.typewrite:hover, a.typewrite:active{
     text-decoration: none !important;
     color: #06D6A0;
     font-family: 'Ultra', serif;

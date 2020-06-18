@@ -89,7 +89,7 @@ def response_reminder(channel_id, question):
 def secret_signing_valid(request):
     slack_secret = request.META['HTTP_X_SLACK_SIGNATURE']
     timestamp = request.headers['X-Slack-Request-Timestamp']
-    sig_basestring = 'v0:' + timestamp + ':' + request.body
+    sig_basestring = 'v0:' + timestamp + ':' + request.data
     my_signature = 'v0=' + hmac.compute_hash_sha256(
         SLACK_SIGNING_SECRET,
         sig_basestring

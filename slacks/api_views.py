@@ -153,11 +153,9 @@ def question(request):
 @csrf_exempt
 @api_view(['POST', 'GET'])
 def events(request):
-    print(request.POST)
-    print(request.META['HTTP_X_SLACK_SIGNATURE'])
     if request.method == 'POST':
         data = {
-            'challenge': request.POST['challenge'],
+            'challenge': request.data['challenge'],
         }
     else:
         data = {}

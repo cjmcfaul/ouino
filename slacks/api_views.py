@@ -21,6 +21,7 @@ from slack import WebClient
 import requests
 
 SLACK_BOT_TOKEN = os.environ["SLACK_BOT_TOKEN"]
+SLACK_SIGNING_SECRET = os.environ["SLACK_SIGNING_SECRET"]
 slack_client = WebClient(SLACK_BOT_TOKEN)
 
 '''
@@ -143,15 +144,20 @@ def question(request):
 
 
 @csrf_exempt
+@api_view(['POST', ])
 def events(request):
 
-    if request.data['type'] == 'app_home_opened':
-        data = {
+    if request.data['token'] == SLACK_SIGNING_SECRET:
+        if request.data['type'] == 'app_home_opened':
+            data = {
 
-        }
+            }
+        else:
+            data = {
+                'challenge': request.data['challenge'],
+            }
+
+        return Response(data, status=status.HTTP_200_OK)
+
     else:
-        data = {
-            'challenge': request.data['challenge'],
-        }
-
-    return Response(data, status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_403_FORBIDDEN)

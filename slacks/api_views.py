@@ -12,7 +12,8 @@ from rest_framework import status
 from slacks import blocks
 from slacks.backends import (
     create_channel_members_dict,
-    question_response
+    question_response,
+    secret_signing_valid
 )
 from questions.models import Question
 from questions.tasks import respond_notify
@@ -21,7 +22,6 @@ from slack import WebClient
 import requests
 
 SLACK_BOT_TOKEN = os.environ["SLACK_BOT_TOKEN"]
-SLACK_SIGNING_SECRET = os.environ["SLACK_SIGNING_SECRET"]
 slack_client = WebClient(SLACK_BOT_TOKEN)
 
 '''
@@ -102,7 +102,7 @@ def interactive_commands(request):
 @csrf_exempt
 @api_view(['POST', ])
 def question(request):
-    if request.META['HTTP_X_SLACK_SIGNATURE'] == SLACK_SIGNING_SECRET:
+    if secret_signing_valid(request):
         if request.data['command'] == '/question':
             user_question = "*%s*" % request.data['text']
             channel_id = request.data['channel_id']

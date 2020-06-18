@@ -1,12 +1,14 @@
 import os
 import requests
 import json
+import hmac
 
 from slack import WebClient
 
 from slacks import blocks
 
 SLACK_BOT_TOKEN = os.environ["SLACK_BOT_TOKEN"]
+SLACK_SIGNING_SECRET = os.environ["SLACK_SIGNING_SECRET"]
 
 slack_client = WebClient(SLACK_BOT_TOKEN)
 
@@ -82,3 +84,17 @@ def response_reminder(channel_id, question):
         channel=channel_id,
         blocks=blocks.response_reminder(question)
     )
+
+
+def secret_signing_valid(request):
+    slack_secret = request.META['HTTP_X_SLACK_SIGNATURE']
+    timestamp = request.headers['X-Slack-Request-Timestamp']
+    sig_basestring = 'v0:' + timestamp + ':' + request.body
+    my_signature = 'v0=' + hmac.compute_hash_sha256(
+        SLACK_SIGNING_SECRET,
+        sig_basestring
+    ).hexdigest()
+    if hmac.compare(my_signature, slack_secret):
+        return True
+    else:
+        False

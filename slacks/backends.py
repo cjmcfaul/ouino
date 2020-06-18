@@ -93,7 +93,7 @@ def secret_signing_valid(request):
     sig_basestring = 'v0:' + timestamp + ':' + request.body.decode("utf-8")
     my_signature = 'v0=' + hmac.new(
         str.encode(SLACK_SIGNING_SECRET),
-        sig_basestring,
+        sig_basestring.encode('utf-8'),
         hashlib.sha256
     ).hexdigest()
     if my_signature == slack_secret:

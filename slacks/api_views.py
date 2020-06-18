@@ -155,12 +155,16 @@ def question(request):
 def events(request):
     print(request.body)
     print(request.data)
+    print(request.POST)
+    print(request.GET)
     if request.method == 'POST':
         data = {
             'challenge': request.body['challenge'],
         }
     else:
-        data = {}
+        data = {
+            'challenge': request.GET(['challenge'])
+        }
 
     return Response(data, status=status.HTTP_200_OK)
 

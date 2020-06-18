@@ -163,7 +163,7 @@ def events(request):
         }
     else:
         data = {
-            'challenge': request.GET(['challenge'])
+            'challenge': request.GET['challenge']
         }
 
     return Response(data, status=status.HTTP_200_OK)

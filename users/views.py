@@ -8,8 +8,10 @@ def support(request):
     })
 
 
+# https://www.ouino.app/install/?code=1173465096773.1177687522231.a84c10fd2ec530db7b0699b2fef17e0ed13411b49ad6783dff1a24901363d7e6&state=
 def install(request):
-    print(request.body)
+    code = request.GET.get('code', None)
+    print(code)
     return render(request, 'users/install.html', {
 
     })

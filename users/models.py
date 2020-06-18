@@ -9,7 +9,6 @@ class CustomUser(AbstractUser):
         default=uuid.uuid4,
         editable=False,
     )
-    '''
     slack_id = models.CharField(
         max_length=200,
         blank=True,
@@ -23,10 +22,10 @@ class CustomUser(AbstractUser):
     team = models.ForeignKey(
         'slacks.Team',
         blank=True,
-        null=True
-        related_name='members'
+        null=True,
+        related_name='members',
+        on_delete=models.CASCADE
     )
     onboarding_complete = models.BooleanField(
         default=False
     )
-    '''

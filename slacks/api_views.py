@@ -17,6 +17,7 @@ from slacks.backends import (
 )
 from questions.models import Question
 from questions.tasks import respond_notify
+from users.models import CustomUser
 
 from slack import WebClient
 import requests
@@ -155,7 +156,7 @@ def question(request):
 def events(request):
     print(request.data)
     if request.data['type'] == 'app_home_opened':
-        user = ''  # CustomUser.objects.get(slack_id=request.data['user'])
+        user = CustomUser.objects.get_or_create(slack_id=request.data['user'])
         if user:
             slack_client.chat_postMessage(
                 channel=request.data['channel'],

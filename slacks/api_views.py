@@ -140,3 +140,18 @@ def question(request):
         data = {}
 
     return Response(data, status=status.HTTP_200_OK)
+
+
+@csrf_exempt
+def events(request):
+
+    if request.data['type'] == 'app_home_opened':
+        data = {
+
+        }
+    else:
+        data = {
+            'challenge': request.data['challenge'],
+        }
+
+    return Response(data, status=status.HTTP_200_OK)

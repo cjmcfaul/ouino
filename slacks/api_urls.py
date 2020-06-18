@@ -6,10 +6,14 @@ from slacks import api_views as views
 urlpatterns = [
     path(
         'interactive-commands/',
-        views.interactive_commands,
+        views.interactive_commands
     ),
     path(
         'question/',
-        views.question,
+        views.question
+    ),
+    path(
+        'events/',
+        views.events
     )
 ]

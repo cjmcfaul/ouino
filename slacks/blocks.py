@@ -221,3 +221,12 @@ def feedback_command_block():
     ]
 
     return block
+
+
+def welcome_block():
+
+    block = [
+
+    ]
+
+    return block

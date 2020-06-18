@@ -155,9 +155,12 @@ def question(request):
 def events(request):
     print(request.POST)
     print(request.META['HTTP_X_SLACK_SIGNATURE'])
-    data = {
-        'challenge': request.POST['challenge'],
-    }
+    if request.method == 'POST':
+        data = {
+            'challenge': request.POST['challenge'],
+        }
+    else:
+        data = {}
 
     return Response(data, status=status.HTTP_200_OK)
 

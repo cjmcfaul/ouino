@@ -153,27 +153,13 @@ def question(request):
 @csrf_exempt
 @api_view(['POST', 'GET'])
 def events(request):
-    if request.method == 'POST':
-        data = {
-            'challenge': request.data['challenge'],
-        }
-    else:
-        data = {
-            'challenge': request.GET['challenge']
-        }
+    print(request.data)
+    if request.data['type'] == 'app_home_opened':
+        user = ''  # CustomUser.objects.get(slack_id=request.data['user'])
+        if user:
+            slack_client.chat_postMessage(
+                channel=request.data['channel'],
+                blocks=blocks.welcome_block()
+            )
 
-    return Response(data, status=status.HTTP_200_OK)
-
-    '''
-
-if request.data['type'] == 'app_home_opened':
-    data = {
-
-    }
-else:
-    
-if request.META['HTTP_X_SLACK_SIGNATURE'] == SLACK_SIGNING_SECRET:
-    pass
-else:
-    return Response(status=status.HTTP_403_FORBIDDEN)
-'''
+    return Response(status=status.HTTP_200_OK)

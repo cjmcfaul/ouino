@@ -26,4 +26,7 @@ class CustomUser(AbstractUser):
         null=True
         related_name='members'
     )
+    onboarding_complete = models.BooleanField(
+        default=False
+    )
     '''

@@ -7,7 +7,11 @@ import hashlib
 from slack import WebClient
 
 from slacks import blocks
+from slacks.models import Team
+from users.models import CustomUser
 
+SLACK_CLIENT_ID = os.environ["SLACK_CLIENT_ID"]
+SLACK_CLIENT_SECRET = os.environ["SLACK_CLIENT_SECRET"]
 SLACK_BOT_TOKEN = os.environ["SLACK_BOT_TOKEN"]
 SLACK_SIGNING_SECRET = os.environ["SLACK_SIGNING_SECRET"]
 
@@ -100,3 +104,34 @@ def secret_signing_valid(request):
         return True
     else:
         return False
+
+
+def get_oauth(code):
+
+    response = slack_client.oauth_v2_access(
+        client_id=SLACK_CLIENT_ID,
+        client_secret=SLACK_CLIENT_SECRET,
+        code=code
+    )
+    team, new = Team.objects.get_or_create(
+        slack_id=response['team']['id']
+    )
+    if new:
+        team.name = response['team']['name']
+        team.bot_access_token = response['access_token']
+        team.bot_slack_id = response['bot_user_id']
+        team.save()
+
+    try:
+        CustomUser.objects.get(
+            slack_id=response['authed_user']['id']
+        )
+    except:
+        CustomUser.objects.create_user(
+            username=response['authed_user']['id'],
+            slack_id=response['authed_user']['id'],
+            slack_access_token=response['authed_user']['access_token'],
+            team=team,
+        )
+
+    return 'success'

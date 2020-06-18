@@ -56,6 +56,12 @@ body {
     font-size: 3rem;
 }
 
+.install-confirmation h1{
+    font-size: 3rem;
+    color: #06D6A0;
+    font-family: 'Ultra', serif;
+}
+
 .wait-list-form-box a,  .wait-list-form-box a:hover, .wait-list-form-box a:active{
     text-decoration: none !important;
     color: #06D6A0;

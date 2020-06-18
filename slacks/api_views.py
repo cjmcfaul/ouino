@@ -161,6 +161,8 @@ def events(request):
                     channel=request.data['channel'],
                     blocks=blocks.welcome_block()
                 )
+                user.onboarding_complete = True
+                user.save()
 
         return Response(status=status.HTTP_200_OK)
     else:

@@ -18,3 +18,13 @@ class Team(models.Model):
         blank=True,
         null=True
     )
+    bot_access_token = models.CharField(
+        max_length=300,
+        blank=True,
+        null=True
+    )
+    bot_slack_id = models.CharField(
+        max_length=200,
+        blank=True,
+        null=True
+    )

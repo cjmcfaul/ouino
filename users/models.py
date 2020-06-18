@@ -19,6 +19,11 @@ class CustomUser(AbstractUser):
         blank=True,
         null=True
     )
+    slack_access_token = models.CharField(
+        max_length=300,
+        blank=True,
+        null=True
+    )
     team = models.ForeignKey(
         'slacks.Team',
         blank=True,

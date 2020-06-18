@@ -9,7 +9,7 @@ def support(request):
 
 
 def install(request):
-    print(request.content)
+    print(request.body)
     return render(request, 'users/install.html', {
 
     })

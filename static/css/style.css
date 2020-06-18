@@ -19,15 +19,22 @@ body {
     color: #073B4C;
 }
 
-#landingVideo {
+#landingVideo, #noVideo {
      position: fixed;
      right: 0;
      bottom: 0;
      left: 0;
-     z-index: -2;
      width: 100vw;
      height: 100vh;
      object-fit: cover;
+}
+
+#landingVideo {
+    z-index: -2;
+}
+
+#noVideo {
+    z-index: -3;
 }
 
 .landing-background-content {

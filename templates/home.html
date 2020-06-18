@@ -62,8 +62,11 @@
 </script>
 {% endblock %}
 {% block content %}
-<video autoplay muted loop id="landingVideo" >
+<video autoplay muted loop id="landingVideo">
     <source id="videoSource" src="{% static 'media/videos/2-laptops-1-man-md.mp4' %}" type="video/mp4">
+</video>
+<video muted id="noVideo">
+    <source src="{% static 'media/videos/no-btn-video-md.mp4' %}" type="video/mp4">
 </video>
 <div class="landing-background-content">
     <div class="logo-container d-flex justify-content-between">
@@ -88,7 +91,7 @@
             </div>
             <div class="d-flex justify-content-center pt-3">
                 <a href="{% url 'more_info' %}" class="btn btn-success mr-3">Yes</a>
-                <a href="#no" class="btn btn-danger" onclick="changeVideo()">No</a>
+                <a href="#no" class="btn btn-danger" onclick="noVideo()">No</a>
             </div>
             <div class="d-flex justify-content-center pt-5">
 
@@ -99,15 +102,18 @@
 {% endblock %}
 {% block footer %}
 <script>
+    function noVideo() {
+        var video = document.getElementById('landingVideo');
+        var noVideo = document.getElementById('noVideo');
+        noVideo.play();
+        video.remove();
+    }
     function changeVideo() {
         var video = document.getElementById('landingVideo');
         var source = document.getElementById('videoSource');
-
         setTimeout(function() {
             video.pause();
-
             source.setAttribute('src', '{% static 'media/videos/no-btn-video-md.mp4' %}');
-
             video.load();
             video.play();
             video.removeAttribute('loop');

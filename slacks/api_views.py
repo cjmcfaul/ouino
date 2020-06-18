@@ -144,9 +144,10 @@ def question(request):
 
 
 @csrf_exempt
-@api_view(['POST', ])
+@api_view(['POST', 'GET'])
 def events(request):
     print(request.data)
+    print(request.META['x-slack-signature'])
     if request.META['x-slack-signature'] == SLACK_SIGNING_SECRET:
         if request.data['type'] == 'app_home_opened':
             data = {

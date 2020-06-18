@@ -153,13 +153,9 @@ def question(request):
 @csrf_exempt
 @api_view(['POST', 'GET'])
 def events(request):
-    print(request.body)
-    print(request.data)
-    print(request.POST)
-    print(request.GET)
     if request.method == 'POST':
         data = {
-            'challenge': request.body['challenge'],
+            'challenge': request.data['challenge'],
         }
     else:
         data = {

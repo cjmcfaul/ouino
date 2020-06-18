@@ -9,3 +9,15 @@ class CustomUser(AbstractUser):
         default=uuid.uuid4,
         editable=False,
     )
+    '''
+    slack_id = models.CharField(
+        max_length=200,
+        blank=True,
+        null=True
+    )
+    slack_username = models.CharField(
+        max_length=200,
+        blank=True,
+        null=True
+    )
+    '''

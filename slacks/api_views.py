@@ -153,24 +153,24 @@ def question(request):
 @csrf_exempt
 @api_view(['POST', 'GET'])
 def events(request):
-    print(request.body)
-    print(request.META)
+    print(request.POST)
     print(request.META['HTTP_X_SLACK_SIGNATURE'])
-
-    if request.data['type'] == 'app_home_opened':
-        data = {
-
-        }
-    else:
-        data = {
-            'challenge': request.body['challenge'],
-        }
+    data = {
+        'challenge': request.POST['challenge'],
+    }
 
     return Response(data, status=status.HTTP_200_OK)
 
     '''
-    if request.META['HTTP_X_SLACK_SIGNATURE'] == SLACK_SIGNING_SECRET:
-        pass
-    else:
-        return Response(status=status.HTTP_403_FORBIDDEN)
-    '''
+
+if request.data['type'] == 'app_home_opened':
+    data = {
+
+    }
+else:
+    
+if request.META['HTTP_X_SLACK_SIGNATURE'] == SLACK_SIGNING_SECRET:
+    pass
+else:
+    return Response(status=status.HTTP_403_FORBIDDEN)
+'''

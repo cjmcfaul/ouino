@@ -203,3 +203,21 @@ def response_reminder(question):
         }
     ]
     return block
+
+
+def help_command_block():
+
+    block = [
+
+    ]
+
+    return block
+
+
+def feedback_command_block():
+
+    block = [
+
+    ]
+
+    return block

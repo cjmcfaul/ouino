@@ -19,6 +19,7 @@ from django.views.generic.base import TemplateView
 
 from users.views import (
     support,
+    install
 )
 
 urlpatterns = [
@@ -32,6 +33,11 @@ urlpatterns = [
         'support/',
         support,
         name='support'
+    ),
+    path(
+        'install/',
+        install,
+        name='install'
     ),
     path(
         'privacy-policy/',

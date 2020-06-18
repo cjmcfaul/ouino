@@ -104,7 +104,17 @@ def question(request):
     if request.data['command'] == '/question':
         user_question = "*%s*" % request.data['text']
         channel_id = request.data['channel_id']
-        if len(request.data['text']) > 140:
+        if request.data['text'].strip() == 'help':
+            data = {
+                "channel": channel_id,
+                "blocks": blocks.help_command_block()
+            }
+        elif request.data['text'].strip() == 'feedback':
+            data = {
+                "channel": channel_id,
+                "blocks": blocks.feedback_command_block()
+            }
+        elif len(request.data['text']) > 140:
             data = {
                 "channel": channel_id,
                 "text": "Your question is longer than 140 characters."

@@ -226,7 +226,13 @@ def feedback_command_block():
 def welcome_block():
 
     block = [
-
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "Thanks for using Ouino! To get started, just use the */question* command followed by the question you want to ask. Your question needs to have a question mark in it and needs to be less than 140 characters."
+            }
+        },
     ]
 
     return block

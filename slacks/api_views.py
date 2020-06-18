@@ -157,7 +157,7 @@ def events(request):
     print(request.data)
     if request.data['type'] == 'app_home_opened':
         user = CustomUser.objects.get_or_create(slack_id=request.data['user'])
-        if user:
+        if not user.onboarding_complete:
             slack_client.chat_postMessage(
                 channel=request.data['channel'],
                 blocks=blocks.welcome_block()

@@ -20,4 +20,10 @@ class CustomUser(AbstractUser):
         blank=True,
         null=True
     )
+    team = models.ForeignKey(
+        'slacks.Team',
+        blank=True,
+        null=True
+        related_name='members'
+    )
     '''

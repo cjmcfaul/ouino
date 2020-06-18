@@ -102,45 +102,52 @@ def interactive_commands(request):
 @csrf_exempt
 @api_view(['POST', ])
 def question(request):
-    if request.data['command'] == '/question':
-        user_question = "*%s*" % request.data['text']
-        channel_id = request.data['channel_id']
-        if request.data['text'].strip() == 'help':
-            data = {
-                "channel": channel_id,
-                "blocks": blocks.help_command_block()
-            }
-        elif request.data['text'].strip() == 'feedback':
-            data = {
-                "channel": channel_id,
-                "blocks": blocks.feedback_command_block()
-            }
-        elif len(request.data['text']) > 140:
-            data = {
-                "channel": channel_id,
-                "text": "Your question is longer than 140 characters."
-            }
-        elif "?" not in request.data['text']:
-            data = {
-                "channel": channel_id,
-                "text": "We didn't notice a question mark. Are you sure you're asking a quesiton?"
-            }
+    if request.META['HTTP_X_SLACK_SIGNATURE'] == SLACK_SIGNING_SECRET:
+        if request.data['command'] == '/question':
+            user_question = "*%s*" % request.data['text']
+            channel_id = request.data['channel_id']
+            if request.data['text'].strip() == 'help':
+                data = {
+                    "channel": channel_id,
+                    "blocks": blocks.help_command_block()
+                }
+            elif request.data['text'].strip() == 'feedback':
+                data = {
+                    "channel": channel_id,
+                    "blocks": blocks.feedback_command_block()
+                }
+            elif len(request.data['text']) > 140:
+                data = {
+                    "channel": channel_id,
+                    "text": "Your question is longer than 140 characters."
+                }
+            elif "?" not in request.data['text']:
+                data = {
+                    "channel": channel_id,
+                    "text": "We didn't notice a question mark. Are you sure you're asking a quesiton?"
+                }
+            else:
+                question = Question.objects.create(
+                    created_by=request.data['user_id'],
+                    question_text=user_question,
+                    channel_id=channel_id
+                )
+                data = {
+                    "channel": channel_id,
+                    "blocks": blocks.confirm_question_create_block(user_question, question.public_id)
+                }
+
         else:
-            question = Question.objects.create(
-                created_by=request.data['user_id'],
-                question_text=user_question,
-                channel_id=channel_id
-            )
-            data = {
-                "channel": channel_id,
-                "blocks": blocks.confirm_question_create_block(user_question, question.public_id)
-            }
+            print(request.data)
+            data = {}
 
+        return Response(data, status=status.HTTP_200_OK)
     else:
-        print(request.data)
-        data = {}
-
-    return Response(data, status=status.HTTP_200_OK)
+        try:
+            print(request.META['HTTP_X_SLACK_SIGNATURE'])
+        except:
+            pass
+        return Response(status=status.HTTP_403_FORBIDDEN)
 
 
 @csrf_exempt
@@ -148,18 +155,22 @@ def question(request):
 def events(request):
     print(request.body)
     print(request.META)
-    print(request.META['X-Slack-Signature'])
-    if request.META['X-Slack-Signature'] == SLACK_SIGNING_SECRET:
-        if request.data['type'] == 'app_home_opened':
-            data = {
+    print(request.META['HTTP_X_SLACK_SIGNATURE'])
 
-            }
-        else:
-            data = {
-                'challenge': request.body['challenge'],
-            }
+    if request.data['type'] == 'app_home_opened':
+        data = {
 
-        return Response(data, status=status.HTTP_200_OK)
+        }
+    else:
+        data = {
+            'challenge': request.body['challenge'],
+        }
 
+    return Response(data, status=status.HTTP_200_OK)
+
+    '''
+    if request.META['HTTP_X_SLACK_SIGNATURE'] == SLACK_SIGNING_SECRET:
+        pass
     else:
         return Response(status=status.HTTP_403_FORBIDDEN)
+    '''

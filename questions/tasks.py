@@ -13,3 +13,5 @@ def respond_notify(question_id):
             user_info = question.responses[user]
             if not user_info['answer']:
                 response_reminder(user, question)
+
+    return "Done"

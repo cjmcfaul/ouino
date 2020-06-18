@@ -45,6 +45,11 @@ urlpatterns = [
         name='privacy_policy'
     ),
     path(
+        'more-info/',
+        TemplateView.as_view(template_name='more_info.html'),
+        name='more_info'
+    ),
+    path(
         '',
         TemplateView.as_view(template_name='home.html'),
         name='home'

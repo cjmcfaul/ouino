@@ -62,9 +62,11 @@
 </script>
 {% endblock %}
 {% block content %}
-
+<video autoplay muted loop id="landingVideo" >
+    <source src="{% static 'media/videos/2-laptops-1-man.mp4' %}" type="video/mp4">
+</video>
 <div class="waiting-list-background">
-    <div class="waiting-list-background-screen"></div>
+    <div class="wait-list-background-screen"></div>
     <div class="logo-container d-flex justify-content-between">
         <div class="d-flex">
             <img src="{% static 'media/imgs/election.png' %}">

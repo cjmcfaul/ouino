@@ -159,11 +159,11 @@ def events(request):
     if secret_signing_valid(request):
         print(request.data)
         if request.data['event']['type'] == 'app_home_opened':
-            user = CustomUser.objects.get_or_create(slack_id=request.data['user'])
+            user = CustomUser.objects.get_or_create(slack_id=request.data['event']['user'])
             if not user.onboarding_complete:
                 slack_client.chat_postMessage(
                     channel=request.data['channel'],
-                    blocks=blocks.welcome_block()
+                    blocks=blocks.welcome_block(username=user.username)
                 )
                 user.onboarding_complete = True
                 user.save()

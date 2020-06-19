@@ -150,12 +150,15 @@ def question(request):
         return Response(status=status.HTTP_403_FORBIDDEN)
 
 
+'''
+{'token': 'a5b0ETDdz83wnLwxqYqUqvoH', 'team_id': 'T0153DP2UNR', 'api_app_id': 'A015HDULDKK', 'event': {'type': 'app_home_opened', 'user': 'U015B0PL1BN', 'channel': 'D014YSJK370', 'tab': 'messages', 'event_ts': '1592588029.082025'}, 'type': 'event_callback', 'event_id': 'Ev015RD8AMRR', 'event_time': 1592588029}
+'''
 @csrf_exempt
 @api_view(['POST', 'GET'])
 def events(request):
     if secret_signing_valid(request):
         print(request.data)
-        if request.data['type'] == 'app_home_opened':
+        if request.data['event']['type'] == 'app_home_opened':
             user = CustomUser.objects.get_or_create(slack_id=request.data['user'])
             if not user.onboarding_complete:
                 slack_client.chat_postMessage(

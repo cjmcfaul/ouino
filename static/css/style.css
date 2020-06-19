@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Difique Menre';
+  src: local('Difique Menre'),
+       url('/static/fonts/DifiqueMenre.otf') format("opentype");
+}
+
 body {
     margin: 0;
 }
@@ -16,7 +22,7 @@ body {
 }
 
 .logo-container h3 {
-    font-family: 'Lobster', cursive;
+    font-family: 'Difique Menre';
     font-size: 3rem;
     color: #073B4C;
 }

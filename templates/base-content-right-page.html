@@ -1,0 +1,76 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html>
+<title>{% block title %}{% endblock %}</title>
+<head>
+    <meta charset="utf-8">
+    <meta property="og:title" content="Servstry"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:description" content="Helping Bars & Restaurants Protect Our Community"/>
+    <meta property="og:url" content="https://www.servstry.com/"/>
+    <meta property="og:image" content="https://www.servstry.com{% static 'media/imgs/landing-screenshot.png' %}"/>
+    <meta property="og:image:type" content="image/jpeg"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="860"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'icons/feathericon.min.css' %}">
+    <link rel="stylesheet" href="{% static 'icons/essentials/font/flaticon.css' %}">
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/old-style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-168123630-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-168123630-1');
+    </script>
+    {% block head %}{% endblock %}
+</head>
+<body class="overflow-y">
+    <div class="signup-container">
+        <span class="signup-img-left {% block imgclass %}{% endblock %}">
+            {% block logo %}{% endblock %}
+            {% if logo_white %}
+                <a class="float-left mt-3 ml-3" href="{% url 'home' %}">
+                    <img src="{% static 'media/logos/Servstry_Logo_All_White.png' %}" width="225">
+                </a>
+            {% elif logo_blue %}
+                <a class="float-left mt-3 ml-3" href="{% url 'home' %}">
+                    <img src="{% static 'media/logos/Servstry_Logo_All_Blue.png' %}" width="225">
+                </a>
+            {% elif logo_pink %}
+                <a class="float-left mt-3 ml-3" href="{% url 'home' %}">
+                    <img src="{% static 'media/logos/Servstry_Logo_All_Pink.png' %}" width="225">
+                </a>
+            {% endif %}
+            {% if description %}
+                <div class="description-box float-right">
+                    {% block description %}{% endblock %}
+                </div>
+            {% endif %}
+        </span>
+        <span class="signup-form-right">
+            {% block content %}{% endblock %}
+        </span>
+    </div>
+</body>
+<footer>
+    <script>
+        $("#signUpForm :input").change(function() {
+            var nextText = $('#nextBtn').attr('final');
+            $('#nextBtn').html(nextText);
+        });
+    </script>
+    {% block footer %}{% endblock %}
+</footer>

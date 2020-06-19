@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'django_celery_beat',
     'django_celery_results',
     'rest_framework',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -139,6 +140,10 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# Crispy Form Settings
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 # Internationalization

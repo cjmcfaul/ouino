@@ -19,7 +19,8 @@ from django.views.generic.base import TemplateView
 
 from users.views import (
     support,
-    install
+    install,
+    feedback
 )
 
 urlpatterns = [
@@ -29,6 +30,11 @@ urlpatterns = [
     ),
     path('slack/', include('slacks.urls')),
     path('admin/', admin.site.urls),
+    path(
+        'feedback/',
+        feedback,
+        name='feedback'
+    ),
     path(
         'support/',
         support,
@@ -40,8 +46,13 @@ urlpatterns = [
         name='install'
     ),
     path(
+        'terms-and-conditions/',
+        TemplateView.as_view(template_name='info-pages/terms_and_conditions.html'),
+        name='terms_and_conditions'
+    ),
+    path(
         'privacy-policy/',
-        TemplateView.as_view(template_name='privacy_policy.html'),
+        TemplateView.as_view(template_name='info-pages/privacy_policy.html'),
         name='privacy_policy'
     ),
     path(

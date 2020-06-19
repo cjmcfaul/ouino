@@ -74,6 +74,25 @@ body {
     font-family: 'Ultra', serif;
 }
 
+.slack-btn {
+    height: 40px;
+    width: 139px;
+}
+
+@media (max-width: 400px) {
+    .logo-container {
+        margin-left: .5rem;
+    }
+    .logo-container img {
+        margin-right: .5rem;
+    }
+    .slack-btn {
+        height: 20px;
+        width: 117.5px;
+        margin-bottom: .5rem;
+    }
+}
+
 a.typewrite,  a.typewrite:hover, a.typewrite:active{
     text-decoration: none !important;
     color: #06D6A0;

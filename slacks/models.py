@@ -28,3 +28,6 @@ class Team(models.Model):
         blank=True,
         null=True
     )
+
+    def __str__(self):
+        return self.name

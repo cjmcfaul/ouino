@@ -223,14 +223,16 @@ def feedback_command_block():
     return block
 
 
-def welcome_block():
+def welcome_block(username):
+
+    welcome_text = "Hi @%s! Welcome to Ouino, I will help make decisions faster and easier by making breaking things down into a simple “Yes” :white_check_mark: or “No” :x: questions. I’ll make your decision making experience in Slack even better! :hugging_face:\nSay `help` to know more.\nDon’t forget to `/invite` me to your team’s channels" % (username)
 
     block = [
         {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": "Thanks for using Ouino! To get started, just use the */question* command followed by the question you want to ask. Your question needs to have a question mark in it and needs to be less than 140 characters."
+                "text": welcome_text
             }
         },
     ]

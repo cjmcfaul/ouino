@@ -3,4 +3,66 @@
 {% block header %}
 {% endblock %}
 {% block content %}
+<div class="top-section">
+    <div class="logo-container d-flex justify-content-between align-items-center mt-0 pt-3">
+        <div class="d-flex">
+            <img src="{% static 'media/imgs/wizard.png' %}">
+            <h3>ouino</h3>
+        </div>
+        <a href="https://slack.com/oauth/v2/authorize?client_id=1173465096773.1187470693665&scope=commands&user_scope=im:write,chat:write"><img
+                        alt="Add to Slack" class="slack-btn"
+                        src="https://platform.slack-edge.com/img/add_to_slack.png"
+                        srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"></a>
+    </div>
+    <div class="text-center pt-5 pl-4 pr-4">
+        <h1>Some Title Should Go Here</h1>
+        <h4>this is where a subtitle will go</h4>
+    </div>
+    <div class="d-flex justify-content-center">
+        <img src="{% static 'media/imgs/phone-mockup.png' %}" class="phone-example">
+    </div>
+</div>
+<div class="text-description-section">
+    <div class="left-description">
+        <h3 class="text-right">Title</h3>
+        <p>description</p>
+    </div>
+    <div class="right-description">
+        <h3 class="text-left">Title</h3>
+        <p>description</p>
+    </div>
+</div>
+<div class="quote-block d-flex justify-content-center">
+    <div>
+        <h3 class="pb-0">"Any sufficiently crisp question can be answered by a single binary digit-0 or 1, yes or no."</h3>
+        <p class="text-right mb-0">- Carl Sagan</p>
+    </div>
+</div>
+<div class="how-it-works-section mb-4">
+    <h1 class="text-center">How does it work?</h1>
+    <div class="row mt-5 mb-5">
+        <div class="col-md-6">
+
+        </div>
+        <div class="col-md-6">
+            <img src="{% static 'media/imgs/slash-command.png' %}">
+        </div>
+    </div>
+    <div class="row mt-5 mb-5">
+        <div class="col-md-6">
+
+        </div>
+        <div class="col-md-6">
+            <img src="{% static 'media/imgs/urgency.png' %}">
+        </div>
+    </div>
+    <div class="row mt-5 mb-5">
+        <div class="col-md-6">
+
+        </div>
+        <div class="col-md-6">
+            <img src="{% static 'media/imgs/posted.png' %}">
+        </div>
+    </div>
+</div>
 {% endblock %}

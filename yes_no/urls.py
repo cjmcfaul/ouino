@@ -20,7 +20,8 @@ from django.views.generic.base import TemplateView
 from users.views import (
     support,
     install,
-    feedback
+    feedback,
+    more_info
 )
 
 urlpatterns = [
@@ -57,7 +58,7 @@ urlpatterns = [
     ),
     path(
         'more-info/',
-        TemplateView.as_view(template_name='more_info.html'),
+        more_info,
         name='more_info'
     ),
     path(

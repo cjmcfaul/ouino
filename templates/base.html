@@ -17,8 +17,33 @@
 </head>
 <body>
     {% block content %}{% endblock %}
-</body>
-<footer>
+<footer class="page-footer">
+    {% if footer %}
+    <div class="footer">
+        <div class="row h-100 mr-0">
+            <div class="col-2 d-flex justify-content-center align-items-center">
+                <img src="{% static 'media/imgs/wizard.png' %}" class="brandmark" height="50">
+            </div>
+            <div class="col-10 d-flex align-items-center pr-0">
+                <ul class="mb-0">
+                    <li>
+                        <a href="{% url 'feedback' %}">Contact Us</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'support' %}">Help</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'terms_and_conditions' %}">Terms & Conditions</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endif %}
     {% block footer %}{% endblock %}
 </footer>
+</body>
 </html>

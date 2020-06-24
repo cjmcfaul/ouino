@@ -11,7 +11,7 @@ from users.forms import (
 
 def support(request):
 
-    return render(request, 'user/support.html', {
+    return render(request, 'users/support.html', {
 
     })
 
@@ -21,6 +21,13 @@ def install(request):
     get_oauth(code)
     return render(request, 'users/install.html', {
 
+    })
+
+
+def more_info(request):
+
+    return render(request, 'more_info.html', {
+        'footer': True,
     })
 
 

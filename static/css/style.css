@@ -327,6 +327,14 @@ a.typewrite,  a.typewrite:hover, a.typewrite:active{
     background-position: 0;
 }
 
+.top-section h1 {
+    color: var(--light-blue);
+}
+
+.top-section h4 {
+
+}
+
 .phone-example {
     width: 20%;
     min-width: 275px;
@@ -355,10 +363,23 @@ a.typewrite,  a.typewrite:hover, a.typewrite:active{
 }
 
 .quote-block {
-    padding: 2rem;
     margin-bottom: 3rem;
     color: white;
-    background-color: var(--light-blue);
+    background-image: url('/static/media/imgs/planning-notes.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0;
+}
+
+.quote-block-content {
+    width: 100%;
+    padding: 7rem 5rem;
+    background-color: rgba(17, 138, 178, .7);
+}
+
+.quote-block-content p {
+    color: var(--yellow);
+    font-weight: 700;
 }
 
 .how-it-works-section img {

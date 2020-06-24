@@ -15,7 +15,7 @@
     </div>
     <div class="text-center pt-5 pl-4 pr-4">
         <h1>Some Title Should Go Here</h1>
-        <h4>this is where a subtitle will go</h4>
+        <h4 class="text-muted">this is where a subtitle will go</h4>
     </div>
     <div class="d-flex justify-content-center">
         <img src="{% static 'media/imgs/phone-mockup.png' %}" class="phone-example">
@@ -31,17 +31,22 @@
         <p>description</p>
     </div>
 </div>
-<div class="quote-block d-flex justify-content-center">
-    <div>
-        <h3 class="pb-0">"Any sufficiently crisp question can be answered by a single binary digit-0 or 1, yes or no."</h3>
-        <p class="text-right mb-0">- Carl Sagan</p>
+<div class="quote-block">
+    <div class="quote-block-content d-flex justify-content-center">
+        <blockquote class="blockquote">
+            <h2 class="pb-0">Any sufficiently crisp question can be answered by a<br> single binary digit-0 or 1, yes or no.</h2>
+            <p class="text-right mb-0 blockquote-footer">Carl Sagan</p>
+        </blockquote>
     </div>
 </div>
 <div class="how-it-works-section mb-4">
     <h1 class="text-center">How does it work?</h1>
     <div class="row mt-5 mb-5">
         <div class="col-md-6">
-
+            <div class="d-flex justify-content-center">
+                <h3>Ask a question</h3>
+                <p></p>
+            </div>
         </div>
         <div class="col-md-6">
             <img src="{% static 'media/imgs/slash-command.png' %}">
@@ -49,7 +54,10 @@
     </div>
     <div class="row mt-5 mb-5">
         <div class="col-md-6">
-
+            <div class="d-flex justify-content-center">
+                <h3>Set the urgency</h3>
+                <p></p>
+            </div>
         </div>
         <div class="col-md-6">
             <img src="{% static 'media/imgs/urgency.png' %}">
@@ -57,7 +65,10 @@
     </div>
     <div class="row mt-5 mb-5">
         <div class="col-md-6">
-
+            <div class="d-flex justify-content-center">
+                <h3>Get responses</h3>
+                <p></p>
+            </div>
         </div>
         <div class="col-md-6">
             <img src="{% static 'media/imgs/posted.png' %}">

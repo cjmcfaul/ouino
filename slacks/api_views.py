@@ -162,7 +162,7 @@ def events(request):
             if not user.onboarding_complete:
                 slack_client = get_slack_client(request.data['team_id'])
                 slack_client.chat_postMessage(
-                    channel=request.data['channel'],
+                    channel=request.data['event']['channel'],
                     blocks=blocks.welcome_block(username=user.username)
                 )
                 user.onboarding_complete = True

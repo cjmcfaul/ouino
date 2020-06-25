@@ -27,6 +27,12 @@ class Question(models.Model):
     created_by = models.CharField(
         max_length=100,
     )
+    user = models.ForeignKey(
+        'users.CustomUser',
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True
+    )
     status = models.CharField(
         choices=CHOICES,
         max_length=2,

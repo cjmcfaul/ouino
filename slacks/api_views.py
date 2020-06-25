@@ -1,6 +1,4 @@
-import os
 import json
-import datetime
 
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
@@ -13,17 +11,14 @@ from slacks import blocks
 from slacks.backends import (
     create_channel_members_dict,
     question_response,
-    secret_signing_valid
+    secret_signing_valid,
+    get_slack_client
 )
 from questions.models import Question
 from questions.tasks import respond_notify
 from users.models import CustomUser
 
-from slack import WebClient
 import requests
-
-SLACK_BOT_TOKEN = os.environ["SLACK_BOT_TOKEN"]
-slack_client = WebClient(SLACK_BOT_TOKEN)
 
 '''
 <QueryDict: {'payload': ['{"type":"block_actions","user":{"id":"U015B0PL1BN","username":"colinjmcfaul","name":"colinjmcfaul","team_id":"T0153DP2UNR"},"api_app_id":"A015HDULDKK","token":"a5b0ETDdz83wnLwxqYqUqvoH","container":{"type":"message","message_ts":"1591910755.000100","channel_id":"C014Q2ZS695","is_ephemeral":true},"trigger_id":"1172910493366.1173465096773.621177eb12eabea7aeefee22f64f297e","team":{"id":"T0153DP2UNR","domain":"yesnoworkspace"},"channel":{"id":"C014Q2ZS695","name":"project"},"response_url":"https:\\/\\/hooks.slack.com\\/actions\\/T0153DP2UNR\\/1185822901604\\/7hHKe6obk8Hrm4UjaCA9XrsR","actions":[{"type":"static_select","action_id":"urgency_select","block_id":"quY0","selected_option":{"text":{"type":"plain_text","text":"Urgent: in the next three hours","emoji":true},"value":"U"},"placeholder":{"type":"plain_text","text":"Urgency","emoji":true},"action_ts":"1591910942.744196"}]}']}>
@@ -40,12 +35,14 @@ def interactive_commands(request):
         action_id = actions['action_id']
         channel_id = data['channel']['id']
         if action_id == "urgency_select":
-            print(data)
+            '''
+            {'type': 'block_actions', 'user': {'id': 'U015B0PL1BN', 'username': 'colinjmcfaul', 'name': 'colinjmcfaul', 'team_id': 'T0153DP2UNR'}, 'api_app_id': 'A015HDULDKK', 'token': 'a5b0ETDdz83wnLwxqYqUqvoH', 'container': {'type': 'message', 'message_ts': '1593097112.000100', 'channel_id': 'D0154QU02EN', 'is_ephemeral': True}, 'trigger_id': '1212068098484.1173465096773.4213e8fd6dfa36e534813f3efc63f8d5', 'team': {'id': 'T0153DP2UNR', 'domain': 'yesnoworkspace'}, 'channel': {'id': 'D0154QU02EN', 'name': 'directmessage'}, 'response_url': 'https://hooks.slack.com/actions/T0153DP2UNR/1191145409591/aszu5mE8OcHUzuBDoxBJTffZ', 'actions': [{'type': 'static_select', 'action_id': 'urgency_select', 'block_id': 'Vyu', 'selected_option': {'text': {'type': 'plain_text', 'text': 'Urgent: in the next three hours', 'emoji': True}, 'value': '1b09fc77-670f-4759-a668-4aefc5a4c1ad,U'}, 'placeholder': {'type': 'plain_text', 'text': 'Urgency', 'emoji': True}, 'action_ts': '1593097120.098005'}]}
+            '''
             value_list = actions['selected_option']['value'].split(",")
             question = Question.objects.get(public_id=value_list[0])
             question.status = value_list[1]
             if question.channel_id[0] != 'D':
-                question.responses = create_channel_members_dict(question.channel_id, question.created_by)
+                question.responses = create_channel_members_dict(question)
             question.message_ts = data['container']['message_ts']
             question.save()
             block = blocks.question_block(question.question_text, value_list[1], question.public_id)
@@ -132,10 +129,12 @@ def question(request):
                     "text": "We didn't notice a question mark. Are you sure you're asking a quesiton?"
                 }
             else:
+                user = CustomUser.objects.get(slack_id=request.data['user_id'])
                 question = Question.objects.create(
                     created_by=request.data['user_id'],
                     question_text=user_question,
-                    channel_id=channel_id
+                    channel_id=channel_id,
+                    user=user
                 )
                 data = {
                     "channel": channel_id,
@@ -158,10 +157,10 @@ def question(request):
 @api_view(['POST', 'GET'])
 def events(request):
     if secret_signing_valid(request):
-        print(request.data)
         if request.data['event']['type'] == 'app_home_opened':
             user = CustomUser.objects.get_or_create(slack_id=request.data['event']['user'])
             if not user.onboarding_complete:
+                slack_client = get_slack_client(request.data['team_id'])
                 slack_client.chat_postMessage(
                     channel=request.data['channel'],
                     blocks=blocks.welcome_block(username=user.username)

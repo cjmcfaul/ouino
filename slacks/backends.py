@@ -12,20 +12,28 @@ from users.models import CustomUser
 
 SLACK_CLIENT_ID = os.environ["SLACK_CLIENT_ID"]
 SLACK_CLIENT_SECRET = os.environ["SLACK_CLIENT_SECRET"]
-SLACK_BOT_TOKEN = os.environ["SLACK_BOT_TOKEN"]
 SLACK_SIGNING_SECRET = os.environ["SLACK_SIGNING_SECRET"]
 
-slack_client = WebClient(SLACK_BOT_TOKEN)
+
+def get_slack_client(team_id):
+
+    team = Team.objects.get(slack_id=team_id)
+    slack_client = WebClient(team.bot_access_token)
+    return slack_client
 
 
-def create_channel_members_dict(channel_id, created_by):
+def create_channel_members_dict(question):
 
     member_dict = dict()
 
-    response = slack_client.conversations_members(channel=channel_id)
+    bot_token = question.user.team.bot_access_token
+
+    slack_client = WebClient(bot_token)
+
+    response = slack_client.conversations_members(channel=question.channel_id)
     for member in response['members']:
-        if member != created_by:
-            url = "https://slack.com/api/users.info?token=%s&user=%s" %(SLACK_BOT_TOKEN, member)
+        if member != question.created_by:
+            url = "https://slack.com/api/users.info?token=%s&user=%s" %(bot_token, member)
             user_info = requests.get(
                 url=url
             )
@@ -63,6 +71,10 @@ def question_response(data, question, answer):
             new_message = True
 
         if new_message:
+            try:
+                slack_client = get_slack_client(data['team']['id'])
+            except:
+                return print(data)
             if not question.response_message_ts:
                 response = slack_client.chat_postMessage(
                     channel=question.created_by,
@@ -85,6 +97,7 @@ def question_response(data, question, answer):
 
 
 def response_reminder(channel_id, question):
+    slack_client = WebClient(question.user.team.bot_access_token)
     slack_client.chat_postMessage(
         channel=channel_id,
         blocks=blocks.response_reminder(question)
@@ -107,7 +120,7 @@ def secret_signing_valid(request):
 
 
 def get_oauth(code):
-
+    slack_client = WebClient()
     response = slack_client.oauth_v2_access(
         client_id=SLACK_CLIENT_ID,
         client_secret=SLACK_CLIENT_SECRET,

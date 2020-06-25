@@ -40,6 +40,7 @@ def interactive_commands(request):
         action_id = actions['action_id']
         channel_id = data['channel']['id']
         if action_id == "urgency_select":
+            print(data)
             value_list = actions['selected_option']['value'].split(",")
             question = Question.objects.get(public_id=value_list[0])
             question.status = value_list[1]

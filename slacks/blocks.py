@@ -207,8 +207,16 @@ def response_reminder(question):
 
 def help_command_block():
 
-    block = [
+    help_text = "*Let’s check how I work:*\n1. Invite me to any channel your team uses to collaborate or make important decisions.\n2. Send any questions to any *channel* or *DM* you want to ask by typing `/question` All messages must be under 140 characters and end with a “:question:”. Once your collaborators respond, @Ouino will DM you their answer with either :white_check_mark:, :x:, or :snail: (if they haven’t responded yet). This question will be added to a Ounio list of questions asked for each person so no question goes unanswered. Go to the @Ouino app channel to see the repsonses for the questions you've asked."
 
+    block = [
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": help_text
+            }
+        },
     ]
 
     return block

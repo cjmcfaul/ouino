@@ -158,7 +158,7 @@ def question(request):
 def events(request):
     if secret_signing_valid(request):
         if request.data['event']['type'] == 'app_home_opened':
-            user = CustomUser.objects.get_or_create(slack_id=request.data['event']['user'])
+            user, new = CustomUser.objects.get_or_create(slack_id=request.data['event']['user'])
             if not user.onboarding_complete:
                 slack_client = get_slack_client(request.data['team_id'])
                 slack_client.chat_postMessage(

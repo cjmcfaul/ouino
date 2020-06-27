@@ -1,4 +1,4 @@
-def question_block(question_text, urgency, question_public_id):
+def question_block(question, urgency):
 
     status = {
         'U': "*Urgent* :rotating_light: - respond in the next 3 hours",
@@ -11,7 +11,7 @@ def question_block(question_text, urgency, question_public_id):
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": question_text
+                "text": "*%s asked:* %s" % (question.user.fullname, question.question_text)
             }
         },
         {
@@ -24,7 +24,7 @@ def question_block(question_text, urgency, question_public_id):
                         "text": "Yes"
                     },
                     "style": "primary",
-                    "value": str(question_public_id),
+                    "value": str(question.public_id),
                     "action_id": "question_response_yes"
                 },
                 {
@@ -34,7 +34,7 @@ def question_block(question_text, urgency, question_public_id):
                         "text": "No"
                     },
                     "style": "danger",
-                    "value": str(question_public_id),
+                    "value": str(question.public_id),
                     "action_id": "question_response_no"
                 }
             ]
@@ -83,13 +83,13 @@ def question_response(question):
     return block
 
 
-def confirm_question_create_block(question_text, question_public_id):
+def confirm_question_create_block(question):
     block = [
         {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": question_text
+                "text": "*%s asked:* %s" % (question.user.fullname, question.question_text)
             }
         },
         {
@@ -108,21 +108,21 @@ def confirm_question_create_block(question_text, question_public_id):
                                 "type": "plain_text",
                                 "text": "Urgent: in the next three hours"
                             },
-                            "value": "%s,U" % question_public_id
+                            "value": "%s,U" % question.public_id
                         },
                         {
                             "text": {
                                 "type": "plain_text",
                                 "text": "Normal: in the next 24 hours"
                             },
-                            "value": "%s,N" % question_public_id
+                            "value": "%s,N" % question.public_id
                         },
                         {
                             "text": {
                                 "type": "plain_text",
                                 "text": "Whenever: in the next 72 hours"
                             },
-                            "value": "%s,W" % question_public_id
+                            "value": "%s,W" % question.public_id
                         }
                     ]
                 },
@@ -133,7 +133,7 @@ def confirm_question_create_block(question_text, question_public_id):
                         "text": "Cancel"
                     },
                     "style": "danger",
-                    "value": question_public_id,
+                    "value": question.public_id,
                     "action_id": "cancel_question"
                 }
             ]
@@ -164,7 +164,7 @@ def response_reminder(question):
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": question.question_text
+                "text": "*%s asked:* %s" % (question.user.fullname, question.question_text)
             }
         },
         {

@@ -45,7 +45,7 @@ def interactive_commands(request):
                 question.responses = create_channel_members_dict(question)
             question.message_ts = data['container']['message_ts']
             question.save()
-            block = blocks.question_block(question.question_text, value_list[1], question.public_id)
+            block = blocks.question_block(question, value_list[1])
             requests.post(
                 url=data['response_url'],
                 json={
@@ -138,7 +138,7 @@ def question(request):
                 )
                 data = {
                     "channel": channel_id,
-                    "blocks": blocks.confirm_question_create_block(user_question, question.public_id)
+                    "blocks": blocks.confirm_question_create_block(question)
                 }
 
         else:

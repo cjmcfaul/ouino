@@ -65,7 +65,7 @@ def create_users_from_team(team):
                 phone = "+1%s" % user['profile']['phone']
             else:
                 phone = None
-                
+
             CustomUser.objects.create_user(
                 username=user['profile']['display_name'],
                 slack_id=user['id'],

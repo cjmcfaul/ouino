@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.staticfiles',
     'django.contrib.postgres',
+    'phonenumber_field',
     'django_celery_beat',
     'django_celery_results',
     'rest_framework',

@@ -48,6 +48,35 @@ def create_channel_members_dict(question):
     return member_dict
 
 
+def create_users_from_team(team):
+
+    slack_client = WebClient(team.bot_access_token)
+    response = slack_client.users_list()
+    for user in response['members']:
+        if not user['is_bot']:
+            if 'email' in user['profile']:
+                email = user['profile']['email']
+            else:
+                email = None
+
+            if len(user['profile']['phone']) > 10:
+                phone = user['profile']['phone']
+            elif len(user['profile']['phone']) == 10:
+                phone = "+1%s" % user['profile']['phone']
+            else:
+                phone = None
+                
+            CustomUser.objects.create_user(
+                username=user['profile']['display_name'],
+                slack_id=user['id'],
+                team=team,
+                full_name=user['profile']['real_name_normalized'],
+                title=user['profile']['title'],
+                email=email,
+                phone=phone
+            )
+
+
 def question_response(data, question, answer):
     new_message = False
     if question.created_by != data['user']['id']:

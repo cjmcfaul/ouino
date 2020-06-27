@@ -168,6 +168,9 @@ def events(request):
                 user.onboarding_complete = True
                 user.save()
 
+        elif request.data['event']['type'] == 'user_change':
+            print(request.data)
+
         return Response(status=status.HTTP_200_OK)
     else:
         return Response(status=status.HTTP_403_FORBIDDEN)

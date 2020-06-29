@@ -12,7 +12,8 @@ from slacks.backends import (
     create_channel_members_dict,
     question_response,
     secret_signing_valid,
-    get_slack_client
+    get_slack_client,
+    user_change_event
 )
 from questions.models import Question
 from questions.tasks import respond_notify
@@ -157,7 +158,6 @@ def question(request):
 @api_view(['POST', 'GET'])
 def events(request):
     if secret_signing_valid(request):
-        print(request.data)
         if request.data['event']['type'] == 'app_home_opened':
             user, new = CustomUser.objects.get_or_create(slack_id=request.data['event']['user'])
             if not user.onboarding_complete:
@@ -170,7 +170,9 @@ def events(request):
                 user.save()
 
         elif request.data['event']['type'] == 'user_change':
-            print(request.data)
+            result = user_change_event(request.data)
+            if isinstance(result, str):
+                print(result)
 
         return Response(status=status.HTTP_200_OK)
     else:

@@ -133,6 +133,29 @@ def response_reminder(channel_id, question):
     )
 
 
+def user_change_event(data):
+    try:
+        user_obj = CustomUser.objects.get(slack_id=data['event']['user']['id'])
+    except:
+        return 'user does not exist'
+
+    user = data['event']['user']
+
+    if 'email' in user['profile']:
+        user_obj.email = user['profile']['email']
+
+    if len(user['profile']['phone']) > 10:
+        user_obj.phone = user['profile']['phone']
+    elif len(user['profile']['phone']) == 10:
+        user_obj.phone = "+1%s" % user['profile']['phone']
+
+    user_obj.username = user['profile']['display_name']
+    user_obj.full_name = user['profile']['real_name_normalized']
+    user_obj.title = user['profile']['title']
+    user_obj.save()
+    return user_obj
+
+
 def secret_signing_valid(request):
     slack_secret = request.META['HTTP_X_SLACK_SIGNATURE']
     timestamp = request.META['HTTP_X_SLACK_REQUEST_TIMESTAMP']

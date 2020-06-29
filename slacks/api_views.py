@@ -157,6 +157,7 @@ def question(request):
 @api_view(['POST', 'GET'])
 def events(request):
     if secret_signing_valid(request):
+        print(request.data)
         if request.data['event']['type'] == 'app_home_opened':
             user, new = CustomUser.objects.get_or_create(slack_id=request.data['event']['user'])
             if not user.onboarding_complete:
